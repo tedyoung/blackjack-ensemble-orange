@@ -1,0 +1,15 @@
+# Mission/Goals
+
+## Options
+
+1. Multiple simultaneous Games (multiple games of single players vs. dealer)
+
+    [X] Add intermediary: GameService, all commands/queries go through the service
+    [>>] Assign IDs to Game: have all GET/POST include that ID
+         Currently broken: in the process of passing Deck to GameService so it can create a Game with the proper Deck
+    [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
+    [ ] If desired, use real database
+
+2. Add Betting support
+3. Support multiple players (one dealer, multiple players)
+4. Persist games to database (requires #2)

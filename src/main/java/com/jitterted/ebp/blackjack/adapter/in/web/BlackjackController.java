@@ -1,6 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.application.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BlackjackController {
 
-    private final Game game;
+    private final GameService gameService;
 
     @Autowired
-    public BlackjackController(Game game) {
-        this.game = game;
+    public BlackjackController(GameService gameService) {
+        this.gameService = gameService;
     }
 
     @PostMapping("/start-game")
     public String startGame() {
-        // gameService.currentGame().initialDeal()
-        game.initialDeal();
+        gameService.initialDeal();
         return redirectBasedOnGameState();
     }
 
@@ -32,12 +31,12 @@ public class BlackjackController {
 
     @PostMapping("/hit")
     public String hitCommand() {
-        game.playerHits();
+        gameService.playerHits();
         return redirectBasedOnGameState();
     }
 
     public String redirectBasedOnGameState() {
-        if (game.isPlayerDone()) {
+        if (gameService.isPlayerDone()) {
             return "redirect:/done";
         }
         return "redirect:/game";
@@ -46,18 +45,18 @@ public class BlackjackController {
     @GetMapping("/done")
     public String doneView(Model model) {
         populateGameViewIn(model);
-        model.addAttribute("outcome", game.determineOutcome().display());
+        model.addAttribute("outcome", gameService.gameOutcome().display());
         return "done";
     }
 
     @PostMapping("/stand")
     public String standCommand() {
-        game.playerStands();
+        gameService.playerStands();
         return redirectBasedOnGameState();
     }
 
     private void populateGameViewIn(Model model) {
-        GameView gameView = GameView.of(game);
+        GameView gameView = GameView.of(gameService.currentGame());
         model.addAttribute("gameView", gameView);
     }
 

@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.domain.port.GameMonitor;
 
 public class Game {
 
+    private Long id;
     private final Deck deck;
 
     private final Hand dealerHand = new Hand();
@@ -108,5 +109,13 @@ public class Game {
         return playerDone;
     }
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

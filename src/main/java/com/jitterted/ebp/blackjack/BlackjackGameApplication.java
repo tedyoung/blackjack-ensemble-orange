@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack;
 
+import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,11 @@ public class BlackjackGameApplication {
     public Game createGame() {
 //        return new Game(new Deck(), new HttpGameMonitor());
         return new Game(new Deck());
+    }
+
+    @Bean
+    public GameService createGameService(Game game) {
+        return new GameService(game, );
     }
 
 }
