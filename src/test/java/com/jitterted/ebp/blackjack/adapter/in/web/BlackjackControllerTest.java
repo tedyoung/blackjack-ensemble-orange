@@ -91,7 +91,7 @@ class BlackjackControllerTest {
     @Test
     public void donePageShowsFinalGameStateWithOutcome() throws Exception {
         Game game = new Game(new Deck());
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, ));
+        BlackjackController blackjackController = new BlackjackController(new GameService(game, new Deck()));
         blackjackController.startGame();
 
         Model model = new ConcurrentModel();
@@ -108,7 +108,7 @@ class BlackjackControllerTest {
     @Test
     public void playerStandsResultsInRedirectToDonePageAndPlayerIsDone() throws Exception {
         Game game = new Game(new Deck());
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, ));
+        BlackjackController blackjackController = new BlackjackController(new GameService(game, new Deck()));
         blackjackController.startGame();
 
         String redirectPage = blackjackController.standCommand();
@@ -123,7 +123,7 @@ class BlackjackControllerTest {
     @Test
     public void beforeStartGameCurrentGameThrowsAnException() {
         Game game = new Game(new Deck());
-        GameService gameService = new GameService(game, );
+        GameService gameService = new GameService(game, new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         assertThat(gameService.currentGame())
@@ -134,7 +134,7 @@ class BlackjackControllerTest {
     @Test
     public void afterStartGameCurrentGameHasAnId() {
         Game game = new Game(new Deck());
-        GameService gameService = new GameService(game, );
+        GameService gameService = new GameService(game, new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame();

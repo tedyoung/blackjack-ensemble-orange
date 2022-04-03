@@ -19,6 +19,7 @@ public class BlackjackController {
 
     @PostMapping("/start-game")
     public String startGame() {
+        // Goal: gameService.newGame();
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }
@@ -31,6 +32,7 @@ public class BlackjackController {
 
     @PostMapping("/hit")
     public String hitCommand() {
+        // We want to pass an ID here, like: gameService.playerHits(gameId)
         gameService.playerHits();
         return redirectBasedOnGameState();
     }
@@ -56,6 +58,7 @@ public class BlackjackController {
     }
 
     private void populateGameViewIn(Model model) {
+        // We want to use gameService.gameFor(?)
         GameView gameView = GameView.of(gameService.currentGame());
         model.addAttribute("gameView", gameView);
     }

@@ -1,14 +1,18 @@
 # Mission/Goals
 
-## Options
+## Current Feature
 
 1. Multiple simultaneous Games (multiple games of single players vs. dealer)
 
     [X] Add intermediary: GameService, all commands/queries go through the service
     [>>] Assign IDs to Game: have all GET/POST include that ID
-         Currently broken: in the process of passing Deck to GameService so it can create a Game with the proper Deck
+         Next Step: in BlackjackController:
+            use the ID in redirect (returned from the POST) and as input from GET requests
     [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
+        Refactor/extract from GameService
     [ ] If desired, use real database
+
+## Other Feature Options
 
 2. Add Betting support
 3. Support multiple players (one dealer, multiple players)

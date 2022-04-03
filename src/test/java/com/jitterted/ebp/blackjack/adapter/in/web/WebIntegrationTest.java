@@ -31,6 +31,7 @@ public class WebIntegrationTest {
 
     @Test
     public void getGameEndpointIsStatus200Ok() throws Exception {
+        mockMvc.perform(post("/start-game"));
         mockMvc.perform(get("/game"))
                .andExpect(status().isOk());
     }

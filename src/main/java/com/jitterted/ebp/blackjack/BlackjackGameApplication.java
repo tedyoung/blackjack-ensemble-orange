@@ -22,7 +22,7 @@ public class BlackjackGameApplication {
 
     @Bean
     public GameService createGameService(Game game) {
-        return new GameService(game, );
+        return new GameService(game, new Deck());
     }
 
 }

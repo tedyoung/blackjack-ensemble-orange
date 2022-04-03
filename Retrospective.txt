@@ -1,0 +1,28 @@
+Retrospective: Ensemble FRI-PM #2 (April 1, 2022)
+-------------------------------------------------
+Thoughts, Observations
+    Went blank first round, a little strange feeling
+    Failing Integration Test at the start of our Ensemble and was failing at the end
+    Taking too big of a step can result in tests passing before they fail - going right to HashMap for the Game instead of smaller step of using Game field
+        Was good that we recognized it and took a step back
+Learnings
+    Lots of shortcuts
+        Take a little time to practice
+        Cursor movement
+        Selection
+Next Time
+    Can we: Default to not use ‘var’ for Extract Variable
+
+
+Retrospective: Ensemble FRI-PM #1 (March 25, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    When took one step too far, TDD is about tiny little steps
+        It’s not easy to identify those small steps!!
+        Decided to fix the other tests that we broke, perhaps could have done something else?
+            We could! So we went back and (sort of) tried again.
+    New to the codebase, even though we’ve seen it before (memory fades!)
+        The Ensemble will help remember for us (crowdsourced memory)
+Learnings
+    Lots of new stuff: IDE, language
+    mob.sh is really cool!
