@@ -20,6 +20,7 @@ public class GameService {
 
     public GameService(Game game, Deck deck) {
         this.game = game;
+        gameMap.put(42L, game);
     }
 
     public Game startGame() {
@@ -33,7 +34,7 @@ public class GameService {
         if (!started) {
             return null;
         }
-        return game;
+        return gameMap.get(42L);
     }
 
     public Game gameFor(long id) {
@@ -46,22 +47,22 @@ public class GameService {
 
     public void initialDeal() {
         started = true;
-        game.initialDeal();
+        currentGame().initialDeal();
     }
 
     public void playerHits() {
-        game.playerHits();
+        currentGame().playerHits();
     }
 
     public boolean isPlayerDone() {
-        return game.isPlayerDone();
+        return currentGame().isPlayerDone();
     }
 
     public void playerStands() {
-        game.playerStands();
+        currentGame().playerStands();
     }
 
     public GameOutcome gameOutcome() {
-        return game.determineOutcome();
+        return currentGame().determineOutcome();
     }
 }
