@@ -20,14 +20,14 @@ class BlackjackControllerTest {
     @Test
     public void startGameResultsInTwoCardsDealtToPlayer() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        Game game = new Game(deck);
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, deck));
+        GameService gameService = new GameService(deck);
+        BlackjackController blackjackController = new BlackjackController(gameService);
 
         final String redirectPage = blackjackController.startGame();
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game");
-        assertThat(game.playerHand().cards())
+        assertThat(gameService.currentGame().playerHand().cards())
                 .hasSize(2);
     }
 
@@ -37,8 +37,7 @@ class BlackjackControllerTest {
                                              new Card(Suit.HEARTS, Rank.TWO),
                                              new Card(Suit.DIAMONDS, Rank.KING),
                                              new Card(Suit.CLUBS, Rank.THREE)));
-        Game game = new Game(stubDeck);
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, stubDeck));
+        BlackjackController blackjackController = new BlackjackController(new GameService(stubDeck));
         blackjackController.startGame();
 
         Model model = new ConcurrentModel();
@@ -56,9 +55,10 @@ class BlackjackControllerTest {
     @Test
     public void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        Game game = new Game(deck);
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, deck));
+        GameService gameService = new GameService (deck);
+        BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
+        Game game = gameService.currentGame();
 
         String redirectPage = blackjackController.hitCommand();
 
@@ -75,13 +75,13 @@ class BlackjackControllerTest {
     @Test
     public void playerHitsGoesBustAndRedirectsToDonePage() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
-        Game game = new Game(deck);
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, deck));
+        GameService gameService = new GameService(deck);
+        BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
         String redirectPage = blackjackController.hitCommand();
 
-        assertThat(game.isPlayerDone())
+        assertThat(gameService.currentGame().isPlayerDone())
                 .isTrue();
 
         assertThat(redirectPage)
@@ -90,8 +90,8 @@ class BlackjackControllerTest {
 
     @Test
     public void donePageShowsFinalGameStateWithOutcome() throws Exception {
-        Game game = new Game(new Deck());
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, new Deck()));
+        GameService gameService = new GameService(new Deck());
+        BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
         Model model = new ConcurrentModel();
@@ -107,8 +107,8 @@ class BlackjackControllerTest {
 
     @Test
     public void playerStandsResultsInRedirectToDonePageAndPlayerIsDone() throws Exception {
-        Game game = new Game(new Deck());
-        BlackjackController blackjackController = new BlackjackController(new GameService(game, new Deck()));
+        GameService gameService = new GameService(new Deck());
+        BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
         String redirectPage = blackjackController.standCommand();
@@ -116,25 +116,22 @@ class BlackjackControllerTest {
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
 
-        assertThat(game.isPlayerDone())
+        assertThat(gameService.currentGame().isPlayerDone())
                 .isTrue();
     }
 
     @Test
     public void beforeStartGameCurrentGameThrowsAnException() {
-        Game game = new Game(new Deck());
-        GameService gameService = new GameService(game, new Deck());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        GameService gameService = new GameService(new Deck());
+        new BlackjackController(gameService);
 
         assertThat(gameService.currentGame())
                 .isNull();
-
     }
 
     @Test
     public void afterStartGameCurrentGameHasAnId() {
-        Game game = new Game(new Deck());
-        GameService gameService = new GameService(game, new Deck());
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame();
@@ -143,4 +140,14 @@ class BlackjackControllerTest {
                 .isNotNull();
     }
 
+    @Test
+    void startGameCreatesNewGame() {
+        GameService gameService = new GameService(new Deck());
+        BlackjackController blackjackController = new BlackjackController(gameService);
+
+        blackjackController.startGame();
+
+        assertThat(gameService.currentGame().getId())
+                .isZero();
+    }
 }

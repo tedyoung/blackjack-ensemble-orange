@@ -20,6 +20,7 @@ public class BlackjackController {
 
     @PostMapping("/start-game")
     public String startGame() {
+        gameService.startGame();
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }

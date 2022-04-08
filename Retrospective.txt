@@ -1,3 +1,21 @@
+Retrospective: Ensemble FRI-PM #3 (April 8, 2022)
+-------------------------------------------------
+Thoughts, Observations
+    Interesting. 🤔
+    Started out in the wrong direction, then after a full round, started over
+    Hadn’t finished GameService “thought” and wasn’t ready to be used properly
+    A nice break when test fixes were mechanical
+    Identifying the right time to take a step back can be hard
+    Undoing “manually” is hard
+    Hard to do “big” changes in small steps
+        Very tempting to just make the bigger change all at once
+        Do the big change and then revert it and try to do it in smaller steps
+    Fixing test without understanding the true cause of the problem doesn’t always work
+Learnings
+Next Time
+    More explicit commits to provide “save/revert” points
+
+
 Retrospective: Ensemble FRI-PM #2 (April 1, 2022)
 -------------------------------------------------
 Thoughts, Observations
