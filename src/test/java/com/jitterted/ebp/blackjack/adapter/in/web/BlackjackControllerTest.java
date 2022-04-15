@@ -55,7 +55,7 @@ class BlackjackControllerTest {
     @Test
     public void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        GameService gameService = new GameService (deck);
+        GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
         Game game = gameService.currentGame();

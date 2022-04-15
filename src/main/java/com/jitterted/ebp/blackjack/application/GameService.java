@@ -8,26 +8,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameService {
+    private Deck deck;
     private boolean started;
     private long lastId;
     // GameRepository: save, findById
     private Map<Long, Game> gameMap = new HashMap<>();
 
-    public GameService() {
-
-    }
-
-    public GameService(Game game, Deck deck) {
-        gameMap.put(42L, game);
-    }
-
     public GameService(Deck deck) {
+        this.deck = deck;
     }
 
     public Game startGame() {
-        Game game = new Game(new Deck());
+        Game game = new Game(deck);
         game.setId(lastId++);
         gameMap.put(game.getId(), game);
+        gameMap.put(42L, game);
         return game;
     }
 

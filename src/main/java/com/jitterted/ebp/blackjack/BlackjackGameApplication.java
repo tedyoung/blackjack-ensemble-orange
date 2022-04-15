@@ -21,8 +21,8 @@ public class BlackjackGameApplication {
     }
 
     @Bean
-    public GameService createGameService(Game game) {
-        return new GameService(game, new Deck());
+    public GameService createGameService() {
+        return new GameService(new Deck());
     }
 
 }
