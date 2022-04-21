@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.StubDeck;
+import com.jitterted.ebp.blackjack.application.GameNotFound;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
@@ -26,8 +27,9 @@ class BlackjackControllerTest {
         final String redirectPage = blackjackController.startGame();
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/game");
-        assertThat(gameService.currentGame().playerHand().cards())
+                .isEqualTo("redirect:/game/0");
+        Game game = gameService.gameFor(0L);
+        assertThat(game.playerHand().cards())
                 .hasSize(2);
     }
 
@@ -58,12 +60,12 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
-        Game game = gameService.currentGame();
+        Game game = gameService.gameFor(0L);
 
         String redirectPage = blackjackController.hitCommand();
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/game");
+                .isEqualTo("redirect:/game/0");
 
         assertThat(game.playerHand().cards())
                 .hasSize(3);
@@ -81,7 +83,8 @@ class BlackjackControllerTest {
 
         String redirectPage = blackjackController.hitCommand();
 
-        assertThat(gameService.currentGame().isPlayerDone())
+        Game game = gameService.gameFor(0L);
+        assertThat(game.isPlayerDone())
                 .isTrue();
 
         assertThat(redirectPage)
@@ -116,17 +119,18 @@ class BlackjackControllerTest {
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
 
-        assertThat(gameService.currentGame().isPlayerDone())
+        Game game = gameService.gameFor(0L);
+        assertThat(game.isPlayerDone())
                 .isTrue();
     }
 
     @Test
-    public void beforeStartGameCurrentGameThrowsAnException() {
+    public void beforeStartGameThenGameForIdOfZeroThrowsAnException() {
         GameService gameService = new GameService(new Deck());
         new BlackjackController(gameService);
 
-        assertThat(gameService.currentGame())
-                .isNull();
+        assertThatThrownBy(() -> gameService.gameFor(0L))
+                .isInstanceOf(GameNotFound.class);
     }
 
     @Test
@@ -136,7 +140,8 @@ class BlackjackControllerTest {
 
         blackjackController.startGame();
 
-        assertThat(gameService.currentGame())
+        Game game = gameService.gameFor(0L);
+        assertThat(game)
                 .isNotNull();
     }
 
@@ -147,7 +152,8 @@ class BlackjackControllerTest {
 
         blackjackController.startGame();
 
-        assertThat(gameService.currentGame().getId())
+        Game game = gameService.gameFor(0L);
+        assertThat(game.getId())
                 .isZero();
     }
 }

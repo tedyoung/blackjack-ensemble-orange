@@ -11,6 +11,7 @@ public class GameService {
     private Deck deck;
     private boolean started;
     private long lastId;
+    private long currentGameId;
     // GameRepository: save, findById
     private Map<Long, Game> gameMap = new HashMap<>();
 
@@ -21,16 +22,9 @@ public class GameService {
     public Game startGame() {
         Game game = new Game(deck);
         game.setId(lastId++);
+        currentGameId = game.getId();
         gameMap.put(game.getId(), game);
-        gameMap.put(42L, game);
         return game;
-    }
-
-    public Game currentGame() {
-        if (!started) {
-            return null;
-        }
-        return gameMap.get(42L);
     }
 
     public Game gameFor(long id) {
@@ -41,24 +35,24 @@ public class GameService {
         return game;
     }
 
-    public void initialDeal() {
+    public void initialDeal(long gameId) {
         started = true;
-        currentGame().initialDeal();
+        gameFor(gameId).initialDeal();
     }
 
     public void playerHits() {
-        currentGame().playerHits();
+        gameFor(currentGameId).playerHits();
     }
 
     public boolean isPlayerDone() {
-        return currentGame().isPlayerDone();
+        return gameFor(currentGameId).isPlayerDone();
     }
 
     public void playerStands() {
-        currentGame().playerStands();
+        gameFor(currentGameId).playerStands();
     }
 
     public GameOutcome gameOutcome() {
-        return currentGame().determineOutcome();
+        return gameFor(currentGameId).determineOutcome();
     }
 }

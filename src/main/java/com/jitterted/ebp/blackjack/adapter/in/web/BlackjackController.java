@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BlackjackController {
 
     private final GameService gameService;
+    private Long gameId;
 
     @Autowired
     public BlackjackController(GameService gameService) {
@@ -20,12 +21,13 @@ public class BlackjackController {
 
     @PostMapping("/start-game")
     public String startGame() {
-        gameService.startGame();
-        gameService.initialDeal();
-        return redirectBasedOnGameState();
+        Game game = gameService.startGame();
+        gameId = game.getId();
+        gameService.initialDeal(gameId);
+        return redirectBasedOnGameState(); // also use game id here
     }
 
-    @GetMapping("/game")
+    @GetMapping("/game") // we want to add the ID here
     public String gameView(Model model) {
         populateGameViewIn(model);
         return "blackjack";
@@ -42,7 +44,7 @@ public class BlackjackController {
         if (gameService.isPlayerDone()) {
             return "redirect:/done";
         }
-        return "redirect:/game";
+        return "redirect:/game/" + gameId;
     }
 
     @GetMapping("/done")
@@ -59,8 +61,7 @@ public class BlackjackController {
     }
 
     private void populateGameViewIn(Model model) {
-        // We want to use gameService.gameFor(?)
-        GameView gameView = GameView.of(gameService.currentGame());
+        GameView gameView = GameView.of(gameService.gameFor(gameId)); // gameService.gameFor(?)
         model.addAttribute("gameView", gameView);
     }
 
