@@ -60,4 +60,12 @@ class GameServiceTest {
         assertThat(foundGame)
                 .isEqualTo(firstGame);
     }
+
+    @Test
+    public void startGameAssignsIdFromGenerator(){
+        GameService gameService = new GameService(new Deck());
+        Game game = gameService.startGame();
+
+        assertThat(game.getId()).isEqualTo(0L);
+    }
 }

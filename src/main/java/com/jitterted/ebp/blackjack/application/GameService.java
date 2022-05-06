@@ -21,10 +21,14 @@ public class GameService {
 
     public Game startGame() {
         Game game = new Game(deck);
-        game.setId(lastId++);
+        game.setId(idGenerator());
         currentGameId = game.getId();
         gameMap.put(game.getId(), game);
         return game;
+    }
+
+    private long idGenerator() {
+        return lastId++;
     }
 
     public Game gameFor(long id) {

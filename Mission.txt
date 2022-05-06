@@ -8,9 +8,12 @@
     [>>] Assign IDs to Game: have all GET/POST include that ID
          Next Step: in BlackjackController/GameService:
             -> Current in the process of adding the ID to the URLs, right now using 0L (hard-coded) value
+
             -> Need a new test that checks for an ID in the URL that's not the constant
-            -> Stop using a field to hold onto the game ID in GameService: predictable ID Generator?
-            -> Eventually, stop using the field in the BlackjackController to hold onto a Game ID
+        --> requires a predictable ID:
+            -> Stop using `currentGameId` field to hold onto the game ID in GameService: predictable ID Generator?
+
+            -> Eventually, stop using the field `gameId` in the BlackjackController to hold onto a Game ID
             (push the constant out of GameService to the caller)
             -> goal is to get rid of currentGame and replace it with gameFor(id)
             use the ID in redirect (returned from the POST) and as input from GET requests
