@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameService {
+    private final GameIdGenerator gameIdGenerator = new GameIdGenerator();
     private Deck deck;
     private boolean started;
-    private long lastId;
     private long currentGameId;
     // GameRepository: save, findById
     private Map<Long, Game> gameMap = new HashMap<>();
@@ -21,14 +21,10 @@ public class GameService {
 
     public Game startGame() {
         Game game = new Game(deck);
-        game.setId(idGenerator());
+        game.setId(gameIdGenerator.idGenerator());
         currentGameId = game.getId();
         gameMap.put(game.getId(), game);
         return game;
-    }
-
-    private long idGenerator() {
-        return lastId++;
     }
 
     public Game gameFor(long id) {
