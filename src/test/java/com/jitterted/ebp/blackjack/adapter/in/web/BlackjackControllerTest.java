@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.StubDeck;
+import com.jitterted.ebp.blackjack.application.GameIdGenerator;
 import com.jitterted.ebp.blackjack.application.GameNotFound;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Card;
@@ -21,14 +22,14 @@ class BlackjackControllerTest {
     @Test
     public void startGameResultsInTwoCardsDealtToPlayer() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(deck, new GameIdGenerator(41));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         final String redirectPage = blackjackController.startGame();
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/game/0");
-        Game game = gameService.gameFor(0L);
+                .isEqualTo("redirect:/game/41");
+        Game game = gameService.gameFor(41L);
         assertThat(game.playerHand().cards())
                 .hasSize(2);
     }
@@ -39,11 +40,13 @@ class BlackjackControllerTest {
                                              new Card(Suit.HEARTS, Rank.TWO),
                                              new Card(Suit.DIAMONDS, Rank.KING),
                                              new Card(Suit.CLUBS, Rank.THREE)));
-        BlackjackController blackjackController = new BlackjackController(new GameService(stubDeck));
+        GameIdGenerator gameIdGenerator = new GameIdGenerator(13L);
+        GameService gameService = new GameService(stubDeck, gameIdGenerator);
+        BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
         Model model = new ConcurrentModel();
-        blackjackController.gameView(model);
+        blackjackController.gameView(model, 13L);
 
         GameView gameView = (GameView) model.getAttribute("gameView");
 
@@ -52,12 +55,16 @@ class BlackjackControllerTest {
 
         assertThat(gameView.getPlayerCards())
                 .containsExactly("10♦", "K♦");
+
+        Long gameId = (Long) model.getAttribute("gameId");
+        assertThat(gameId)
+                .isEqualTo(13L);
     }
 
     @Test
     public void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(deck, new GameIdGenerator(0));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
         Game game = gameService.gameFor(0L);
@@ -77,7 +84,7 @@ class BlackjackControllerTest {
     @Test
     public void playerHitsGoesBustAndRedirectsToDonePage() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(deck, new GameIdGenerator(0));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -93,7 +100,7 @@ class BlackjackControllerTest {
 
     @Test
     public void donePageShowsFinalGameStateWithOutcome() throws Exception {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -110,7 +117,7 @@ class BlackjackControllerTest {
 
     @Test
     public void playerStandsResultsInRedirectToDonePageAndPlayerIsDone() throws Exception {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -126,7 +133,7 @@ class BlackjackControllerTest {
 
     @Test
     public void beforeStartGameThenGameForIdOfZeroThrowsAnException() {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
         new BlackjackController(gameService);
 
         assertThatThrownBy(() -> gameService.gameFor(0L))
@@ -135,7 +142,7 @@ class BlackjackControllerTest {
 
     @Test
     public void afterStartGameCurrentGameHasAnId() {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame();
@@ -147,7 +154,7 @@ class BlackjackControllerTest {
 
     @Test
     void startGameCreatesNewGame() {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame();

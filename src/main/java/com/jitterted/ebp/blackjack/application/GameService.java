@@ -8,21 +8,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameService {
-    private final GameIdGenerator gameIdGenerator = new GameIdGenerator();
+    private final GameIdGenerator gameIdGenerator;
     private Deck deck;
-    private boolean started;
-    private long currentGameId;
     // GameRepository: save, findById
     private Map<Long, Game> gameMap = new HashMap<>();
 
-    public GameService(Deck deck) {
+    public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
         this.deck = deck;
+        this.gameIdGenerator = gameIdGenerator;
     }
 
     public Game startGame() {
         Game game = new Game(deck);
-        game.setId(gameIdGenerator.idGenerator());
-        currentGameId = game.getId();
+        game.setId(gameIdGenerator.nextId());
         gameMap.put(game.getId(), game);
         return game;
     }
@@ -36,23 +34,22 @@ public class GameService {
     }
 
     public void initialDeal(long gameId) {
-        started = true;
         gameFor(gameId).initialDeal();
     }
 
-    public void playerHits() {
-        gameFor(currentGameId).playerHits();
+    public void playerHits(long gameId) {
+        gameFor(gameId).playerHits();
     }
 
-    public boolean isPlayerDone() {
-        return gameFor(currentGameId).isPlayerDone();
+    public boolean isPlayerDone(long gameId) {
+        return gameFor(gameId).isPlayerDone();
     }
 
-    public void playerStands() {
-        gameFor(currentGameId).playerStands();
+    public void playerStands(long gameId) {
+        gameFor(gameId).playerStands();
     }
 
-    public GameOutcome gameOutcome() {
-        return gameFor(currentGameId).determineOutcome();
+    public GameOutcome gameOutcome(long gameId) {
+        return gameFor(gameId).determineOutcome();
     }
 }

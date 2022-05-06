@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack;
 
+import com.jitterted.ebp.blackjack.application.GameIdGenerator;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
@@ -22,7 +23,7 @@ public class BlackjackGameApplication {
 
     @Bean
     public GameService createGameService() {
-        return new GameService(new Deck());
+        return new GameService(new Deck(), new GameIdGenerator(0));
     }
 
 }

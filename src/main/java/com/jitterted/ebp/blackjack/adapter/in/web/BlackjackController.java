@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -27,21 +28,21 @@ public class BlackjackController {
         return redirectBasedOnGameState(); // also use game id here
     }
 
-    @GetMapping("/game") // we want to add the ID here
-    public String gameView(Model model) {
-        populateGameViewIn(model);
+    @GetMapping("/game/{gameId}")
+    public String gameView(Model model, @PathVariable Long gameId) {
+        populateGameViewIn(model, gameId);
         return "blackjack";
     }
 
     @PostMapping("/hit")
     public String hitCommand() {
         // We want to pass an ID here, like: gameService.playerHits(gameId)
-        gameService.playerHits();
+        gameService.playerHits(gameId);
         return redirectBasedOnGameState();
     }
 
     public String redirectBasedOnGameState() {
-        if (gameService.isPlayerDone()) {
+        if (gameService.isPlayerDone(gameId)) {
             return "redirect:/done";
         }
         return "redirect:/game/" + gameId;
@@ -49,20 +50,21 @@ public class BlackjackController {
 
     @GetMapping("/done")
     public String doneView(Model model) {
-        populateGameViewIn(model);
-        model.addAttribute("outcome", gameService.gameOutcome().display());
+        populateGameViewIn(model, gameId);
+        model.addAttribute("outcome", gameService.gameOutcome(gameId).display());
         return "done";
     }
 
     @PostMapping("/stand")
     public String standCommand() {
-        gameService.playerStands();
+        gameService.playerStands(gameId);
         return redirectBasedOnGameState();
     }
 
-    private void populateGameViewIn(Model model) {
-        GameView gameView = GameView.of(gameService.gameFor(gameId)); // gameService.gameFor(?)
+    private void populateGameViewIn(Model model, Long gameId) {
+        GameView gameView = GameView.of(gameService.gameFor(gameId));
         model.addAttribute("gameView", gameView);
+        model.addAttribute("gameId", gameId);
     }
 
 }

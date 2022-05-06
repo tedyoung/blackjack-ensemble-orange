@@ -10,8 +10,6 @@
             -> Current in the process of adding the ID to the URLs, right now using 0L (hard-coded) value
 
             -> Need a new test that checks for an ID in the URL that's not the constant
-        --> requires a predictable ID:
-            -> Stop using `currentGameId` field to hold onto the game ID in GameService: predictable ID Generator?
 
             -> Eventually, stop using the field `gameId` in the BlackjackController to hold onto a Game ID
             (push the constant out of GameService to the caller)

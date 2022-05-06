@@ -1,12 +1,13 @@
 package com.jitterted.ebp.blackjack.application;
 
 public class GameIdGenerator {
-    long lastId;
+    long gameId;
 
-    public GameIdGenerator() {
+    public GameIdGenerator(long initialGameId) {
+        gameId = initialGameId;
     }
 
-    long idGenerator() {
-        return lastId++;
+    long nextId() {
+        return gameId++;
     }
 }
