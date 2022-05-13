@@ -6,6 +6,7 @@ import com.jitterted.ebp.blackjack.application.GameNotFound;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Rank;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ class BlackjackControllerTest {
         blackjackController.startGame();
         Game game = gameService.gameFor(0L);
 
-        String redirectPage = blackjackController.hitCommand();
+        String redirectPage = blackjackController.hitCommand(0L);
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game/0");
@@ -72,7 +73,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
-        String redirectPage = blackjackController.hitCommand();
+        String redirectPage = blackjackController.hitCommand(0L);
 
         Game game = gameService.gameFor(0L);
         assertThat(game.isPlayerDone())
@@ -80,6 +81,39 @@ class BlackjackControllerTest {
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
+    }
+
+    @Test
+    public void playerHitsForASpecificGame() throws Exception {
+        StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
+        GameService gameService = new GameService(deck, new GameIdGenerator(15));
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame();
+
+        blackjackController.hitCommand(15L);
+
+        Game game = gameService.gameFor(15L);
+        assertThat(game.playerHand().cards())
+                .hasSize(3);
+    }
+
+    @Test
+    public void playerHitsForOneGameDoesNotAffectOtherGame() throws Exception {
+        StubDeck deck = new StubDeck(Rank.TEN, Rank.EIGHT,
+                                     Rank.SEVEN, Rank.JACK,
+                                     Rank.TEN, Rank.EIGHT,
+                                     Rank.SEVEN, Rank.JACK,
+                                     Rank.NINE);
+        GameService gameService = new GameService(deck, new GameIdGenerator(15));
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame();
+        blackjackController.startGame(); // 16
+
+        blackjackController.hitCommand(15L);
+
+        Game secondGame = gameService.gameFor(16L);
+        assertThat(secondGame.playerHand().cards())
+                .hasSize(2);
     }
 
     @Test

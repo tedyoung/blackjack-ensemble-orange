@@ -22,7 +22,7 @@
 
 <br/>
 <h2>Hit or Stand?</h2>
-<form action="/hit" method="post">
+<form th:action="@{/hit/__${gameId}__}" method="post">
     <button value="HIT">Hit</button>
 </form>
 <form action="/stand" method="post">

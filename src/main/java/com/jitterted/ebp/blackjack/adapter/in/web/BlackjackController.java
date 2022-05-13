@@ -34,9 +34,8 @@ public class BlackjackController {
         return "blackjack";
     }
 
-    @PostMapping("/hit")
-    public String hitCommand() {
-        // We want to pass an ID here, like: gameService.playerHits(gameId)
+    @PostMapping("/hit/{gameId}")
+    public String hitCommand(@PathVariable Long gameId) {
         gameService.playerHits(gameId);
         return redirectBasedOnGameState();
     }
