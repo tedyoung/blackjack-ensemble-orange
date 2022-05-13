@@ -25,7 +25,7 @@
 <form th:action="@{/hit/__${gameId}__}" method="post">
     <button value="HIT">Hit</button>
 </form>
-<form action="/stand" method="post">
+<form th:action="@{/stand/__${gameId}__}" method="post">
     <button value="STAND">Stand</button>
 </form>
 
