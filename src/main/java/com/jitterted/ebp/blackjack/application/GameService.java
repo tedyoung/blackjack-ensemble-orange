@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class GameService {
     private final GameIdGenerator gameIdGenerator;
-    private Deck deck;
+    private final Deck deck;
     // GameRepository: save, findById
-    private Map<Long, Game> gameMap = new HashMap<>();
+    private final Map<Long, Game> gameMap = new HashMap<>();
 
     public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
         this.deck = deck;

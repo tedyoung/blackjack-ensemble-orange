@@ -47,19 +47,18 @@ class BlackjackControllerTest {
                 .isEqualTo(13L);
     }
 
-
     @Test
     public void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        GameService gameService = new GameService(deck, new GameIdGenerator(0));
+        GameService gameService = new GameService(deck, new GameIdGenerator(10));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
-        Game game = gameService.gameFor(0L);
+        Game game = gameService.gameFor(10L);
 
-        String redirectPage = blackjackController.hitCommand(0L);
+        String redirectPage = blackjackController.hitCommand(10L);
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/game/0");
+                .isEqualTo("redirect:/game/10");
         assertThat(game.playerHand().cards())
                 .hasSize(3);
         assertThat(game.isPlayerDone())
@@ -99,12 +98,12 @@ class BlackjackControllerTest {
 
     @Test
     public void playerHitsForOneGameDoesNotAffectOtherGame() throws Exception {
-        StubDeck deck = new StubDeck(Rank.TEN, Rank.EIGHT,
-                                     Rank.SEVEN, Rank.JACK,
-                                     Rank.TEN, Rank.EIGHT,
-                                     Rank.SEVEN, Rank.JACK,
-                                     Rank.NINE);
-        GameService gameService = new GameService(deck, new GameIdGenerator(15));
+        StubDeck twoGameDeckForSecondGameHit = new StubDeck(Rank.TEN, Rank.EIGHT,
+                                                            Rank.SEVEN, Rank.JACK,
+                                                            Rank.TEN, Rank.EIGHT,
+                                                            Rank.SEVEN, Rank.JACK,
+                                                            Rank.NINE);
+        GameService gameService = new GameService(twoGameDeckForSecondGameHit, new GameIdGenerator(15));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
         blackjackController.startGame(); // 16

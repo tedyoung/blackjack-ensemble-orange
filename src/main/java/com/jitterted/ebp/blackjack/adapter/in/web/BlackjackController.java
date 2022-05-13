@@ -23,7 +23,7 @@ public class BlackjackController {
     public String startGame() {
         Game game = gameService.startGame();
         gameService.initialDeal(game.getId());
-        return redirectBasedOnGameState(game.getId()); // also use game id here
+        return redirectBasedOnGameState(game.getId());
     }
 
     @GetMapping("/game/{gameId}")
