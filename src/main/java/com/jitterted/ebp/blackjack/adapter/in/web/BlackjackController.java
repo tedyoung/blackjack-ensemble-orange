@@ -40,7 +40,7 @@ public class BlackjackController {
 
     private String redirectBasedOnGameState(Long gameId) {
         if (gameService.isPlayerDone(gameId)) {
-            return "redirect:/done";
+            return "redirect:/done/" + gameId;
         }
         return "redirect:/game/" + gameId;
     }

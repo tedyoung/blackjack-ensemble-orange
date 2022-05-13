@@ -69,18 +69,18 @@ class BlackjackControllerTest {
     @Test
     public void playerHitsGoesBustAndRedirectsToDonePage() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
-        GameService gameService = new GameService(deck, new GameIdGenerator(0));
+        GameService gameService = new GameService(deck, new GameIdGenerator(18));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
-        String redirectPage = blackjackController.hitCommand(0L);
+        String redirectPage = blackjackController.hitCommand(18L);
 
-        Game game = gameService.gameFor(0L);
+        Game game = gameService.gameFor(18L);
         assertThat(game.isPlayerDone())
                 .isTrue();
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/done");
+                .isEqualTo("redirect:/done/18");
     }
 
     @Test
@@ -142,7 +142,7 @@ class BlackjackControllerTest {
         String redirectPage = blackjackController.standCommand(73L);
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/done");
+                .isEqualTo("redirect:/done/73");
 
         Game game = gameService.gameFor(73L);
         assertThat(game.isPlayerDone())
