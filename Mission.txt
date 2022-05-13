@@ -7,14 +7,15 @@
     [X] Add intermediary: GameService, all commands/queries go through the service
     [>>] Assign IDs to Game: have all GET/POST include that ID
          Next Step: in BlackjackController/GameService:
-            -> Current in the process of adding the ID to the URLs, right now using 0L (hard-coded) value
-
-            -> Need a new test that checks for an ID in the URL that's not the constant
+           --> Add ID to POST URL in the HTML's action
+            -> Make all POST handlers use the incoming ID (from the URL)
 
             -> Eventually, stop using the field `gameId` in the BlackjackController to hold onto a Game ID
             (push the constant out of GameService to the caller)
+
             -> goal is to get rid of currentGame and replace it with gameFor(id)
             use the ID in redirect (returned from the POST) and as input from GET requests
+                -> GET to /done needs game ID
     [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
         Refactor/extract from GameService
     [ ] If desired, use real database
