@@ -118,12 +118,12 @@ class BlackjackControllerTest {
 
     @Test
     public void donePageShowsFinalGameStateWithOutcome() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(31));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
         Model model = new ConcurrentModel();
-        blackjackController.doneView(model);
+        blackjackController.doneView(model, 31L);
 
         assertThat(model.containsAttribute("gameView"))
                 .isTrue();
@@ -135,16 +135,16 @@ class BlackjackControllerTest {
 
     @Test
     public void playerStandsResultsInRedirectToDonePageAndPlayerIsDone() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        GameService gameService = new GameService(new Deck(), new GameIdGenerator(73));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
-        String redirectPage = blackjackController.standCommand();
+        String redirectPage = blackjackController.standCommand(73L);
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
 
-        Game game = gameService.gameFor(0L);
+        Game game = gameService.gameFor(73L);
         assertThat(game.isPlayerDone())
                 .isTrue();
     }

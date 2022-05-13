@@ -44,15 +44,14 @@ public class WebIntegrationTest {
 
     @Test
     public void getDoneEndpointIs200Ok() throws Exception {
-        mockMvc.perform(get("/done"))
+        mockMvc.perform(get("/done/0"))
                .andExpect(status().isOk());
     }
 
     @Test
     public void postToStandEndpointIsRedirect() throws Exception {
-        mockMvc.perform(post("/stand"))
+        mockMvc.perform(post("/stand/0"))
                .andExpect(status().is3xxRedirection());
     }
-
 
 }

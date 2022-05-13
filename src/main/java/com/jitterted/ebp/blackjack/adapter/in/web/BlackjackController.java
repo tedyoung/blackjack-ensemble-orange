@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BlackjackController {
 
     private final GameService gameService;
-    private Long gameId;
 
     @Autowired
     public BlackjackController(GameService gameService) {
@@ -23,9 +22,8 @@ public class BlackjackController {
     @PostMapping("/start-game")
     public String startGame() {
         Game game = gameService.startGame();
-        gameId = game.getId();
-        gameService.initialDeal(gameId);
-        return redirectBasedOnGameState(); // also use game id here
+        gameService.initialDeal(game.getId());
+        return redirectBasedOnGameState(game.getId()); // also use game id here
     }
 
     @GetMapping("/game/{gameId}")
@@ -37,27 +35,27 @@ public class BlackjackController {
     @PostMapping("/hit/{gameId}")
     public String hitCommand(@PathVariable Long gameId) {
         gameService.playerHits(gameId);
-        return redirectBasedOnGameState();
+        return redirectBasedOnGameState(gameId);
     }
 
-    public String redirectBasedOnGameState() {
+    private String redirectBasedOnGameState(Long gameId) {
         if (gameService.isPlayerDone(gameId)) {
             return "redirect:/done";
         }
         return "redirect:/game/" + gameId;
     }
 
-    @GetMapping("/done")
-    public String doneView(Model model) {
+    @GetMapping("/done/{gameId}")
+    public String doneView(Model model, @PathVariable Long gameId) {
         populateGameViewIn(model, gameId);
         model.addAttribute("outcome", gameService.gameOutcome(gameId).display());
         return "done";
     }
 
-    @PostMapping("/stand")
-    public String standCommand() {
+    @PostMapping("/stand/{gameId}")
+    public String standCommand(@PathVariable Long gameId) {
         gameService.playerStands(gameId);
-        return redirectBasedOnGameState();
+        return redirectBasedOnGameState(gameId);
     }
 
     private void populateGameViewIn(Model model, Long gameId) {
