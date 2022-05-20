@@ -1,3 +1,78 @@
+Retrospective: Ensemble FRI-PM #6 (May 13, 2022)
+------------------------------------------------
+Thoughts, Observations
+    New network cable needed
+    Nice to see the feature completed!
+        Surprise, we’re done!
+            Can be anti-climatic
+        And see partially done along the way vs. not working at all until it’s all done
+        Lots of fun refactorings along the way
+        Feature: see all completed games and/or in-progress games
+    Going back to the code and tests to review for clean up and possibly more refactoring was useful
+    Changed goal for what I thought we would modify after explaining it the second time
+        Having the idea flow through multiple people’s heads does
+            We catch differences in understanding
+            We come to better solutions and understanding
+    Noticed that we’re missing Object Protocol constraints in Player and Hand
+        Which universe are we in?
+Learnings
+    Commit using IJ via CMD+K
+        Two choices: modal or tool window
+Next Time
+
+Retrospective: Ensemble FRI-PM #5 (May 6, 2022)
+-----------------------------------------------
+Thoughts, Observations
+    Controller testing at a distance instead of testing closer to the object that is doing the work we’re actually testing
+        This is part of the process, as long as you do the refactoring part
+    Soumya was our only committer!
+    Taking larger steps instead of smaller
+        Thinking about the smallest next step we can take
+    Writing code before tests is a hard habit to break
+    Cleaning up our tests!
+    Sometimes tests didn’t break when we added parameter to service methods
+        Indicates missing tests?
+    Try out more refactorings! Just try it!
+        Experiment!
+    Cleaned up new line/whitespace formatting in tests
+    Cleaned up unused fields
+Learnings
+    Learning about the Spring MVC flow and Models
+    “any var” in the Change Signature refactoring
+    CTRL+N for Class and then CTRL+SHIFT+N for File and CTRL+SHIFT+ALT+N
+    CTRL+SHIFT+A for Action
+    F2 navigate to next “error” or “warning"
+Next Time
+    Commit more often
+        As “save” points
+        Helps focus on one thing at a time
+    Code coverage for guidance on missing tests
+    Close the TEST RUN tool window: if the tests pass, close it
+    Close the Terminal when you’re done
+    Code Inlay Hints: Code Vision - show usages, do NOT show committer
+    Driver has permission to “tidy up”
+
+Retrospective: Ensemble FRI-PM #4 (April 15, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Prep machine for Ensemble
+        +1
+    Got distracted: not sure what to focus on as there were several options
+    Making current direction clear
+    Forgetting is NORMAL
+    Higher level goal was clear
+    Made progress forward
+    Non-trivial API change, trying to take small steps is hard!
+    Detective Work: read the WHOLE stack trace
+        Make sure it’s clear what the problem is before trying to solve it
+Learnings
+    What was “assertThatThrownBy” again?
+Next Time
+    Update IntelliJ IDEA
+    (When Ted says: re-clone and re-create the project)
+    Feel free to request Huddle time
+    Introduce ID generator via extract method -> move to class -> make injectable
+
 Retrospective: Ensemble FRI-PM #3 (April 8, 2022)
 -------------------------------------------------
 Thoughts, Observations
