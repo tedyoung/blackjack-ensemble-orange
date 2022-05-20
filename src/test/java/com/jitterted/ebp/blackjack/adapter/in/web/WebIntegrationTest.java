@@ -45,7 +45,7 @@ public class WebIntegrationTest {
     @Test
     public void getDoneEndpointIs200Ok() throws Exception {
         mockMvc.perform(get("/done/0"))
-               .andExpect(status().isOk());
+               .andExpect(status().isNotFound());
     }
 
     @Test

@@ -66,7 +66,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void playerHitsGoesBustAndRedirectsToDonePage() throws Exception {
+    public void playerHitsGoesBustAndRedirectsToGamePage() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
         GameService gameService = new GameService(deck, new GameIdGenerator(18));
         BlackjackController blackjackController = new BlackjackController(gameService);
@@ -79,7 +79,7 @@ class BlackjackControllerTest {
                 .isTrue();
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/done/18");
+                .isEqualTo("redirect:/game/18");
     }
 
     @Test
@@ -116,24 +116,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void donePageShowsFinalGameStateWithOutcome() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(31));
-        BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
-
-        Model model = new ConcurrentModel();
-        blackjackController.doneView(model, 31L);
-
-        assertThat(model.containsAttribute("gameView"))
-                .isTrue();
-
-        String outcome = (String) model.getAttribute("outcome");
-        assertThat(outcome)
-                .isNotBlank();
-    }
-
-    @Test
-    public void playerStandsResultsInRedirectToDonePageAndPlayerIsDone() throws Exception {
+    public void playerStandsResultsInRedirectToGamePageAndPlayerIsDone() throws Exception {
         GameService gameService = new GameService(new Deck(), new GameIdGenerator(73));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
@@ -141,7 +124,7 @@ class BlackjackControllerTest {
         String redirectPage = blackjackController.standCommand(73L);
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/done/73");
+                .isEqualTo("redirect:/game/73");
 
         Game game = gameService.gameFor(73L);
         assertThat(game.isPlayerDone())
@@ -180,4 +163,35 @@ class BlackjackControllerTest {
         assertThat(game.getId())
                 .isZero();
     }
+
+    @Test
+    void gameViewForDoneGameReturnsGameOverTemplateWithOutcome() {
+        GameService gameService = new GameService(StubDeck.playerDealtBlackjack(), new GameIdGenerator(0));
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame();
+
+        ConcurrentModel model = new ConcurrentModel();
+        String page = blackjackController.gameView(model, 0L);
+
+        assertThat(page)
+                .isEqualTo("game-over");
+        assertThat(model.containsAttribute("outcome"))
+                .isTrue();
+        assertThat(model.containsAttribute("gameView"))
+                .isTrue();
+    }
+
+    @Test
+    public void gameViewForGameInProgressReturnsGameInProgressTemplate() {
+        GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new GameIdGenerator(0));
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame();
+
+        ConcurrentModel model = new ConcurrentModel();
+        String page = blackjackController.gameView(model, 0L);
+
+        assertThat(page)
+                .isEqualTo("game-in-progress");
+    }
+
 }

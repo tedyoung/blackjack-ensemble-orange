@@ -23,39 +23,33 @@ public class BlackjackController {
     public String startGame() {
         Game game = gameService.startGame();
         gameService.initialDeal(game.getId());
-        return redirectBasedOnGameState(game.getId());
+        return redirectToGamePage(game.getId());
     }
 
     @GetMapping("/game/{gameId}")
     public String gameView(Model model, @PathVariable Long gameId) {
         populateGameViewIn(model, gameId);
-        return "blackjack";
+        if(gameService.isPlayerDone(gameId)){
+            model.addAttribute("outcome", gameService.gameOutcome(gameId).display());
+            return "game-over";
+        }
+        return "game-in-progress";
     }
 
     @PostMapping("/hit/{gameId}")
     public String hitCommand(@PathVariable Long gameId) {
         gameService.playerHits(gameId);
-        return redirectBasedOnGameState(gameId);
+        return redirectToGamePage(gameId);
     }
 
-    private String redirectBasedOnGameState(Long gameId) {
-        if (gameService.isPlayerDone(gameId)) {
-            return "redirect:/done/" + gameId;
-        }
+    private String redirectToGamePage(Long gameId) {
         return "redirect:/game/" + gameId;
-    }
-
-    @GetMapping("/done/{gameId}")
-    public String doneView(Model model, @PathVariable Long gameId) {
-        populateGameViewIn(model, gameId);
-        model.addAttribute("outcome", gameService.gameOutcome(gameId).display());
-        return "done";
     }
 
     @PostMapping("/stand/{gameId}")
     public String standCommand(@PathVariable Long gameId) {
         gameService.playerStands(gameId);
-        return redirectBasedOnGameState(gameId);
+        return redirectToGamePage(gameId);
     }
 
     private void populateGameViewIn(Model model, Long gameId) {

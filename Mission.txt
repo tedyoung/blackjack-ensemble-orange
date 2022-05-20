@@ -4,13 +4,19 @@
 
 1. Multiple simultaneous Games (multiple games of single players vs. dealer)
 
-    [ ] Slight behavior change: maybe consolidate doneView into gameView such that any hit of /game/{gameId} will show the correct state for "done" games
-        * Question: do we end up with two endpoints (/game and /done) or a single endpoint of /game, which returns the appropriate template ("blackjack.html" or "done.html")
-            * Upside of no /done endpoint is can't display invalid state
+    [ ] Slight behavior change: consolidate doneView into gameView such that any hit of /game/{gameId}
+        will show the correct state for "done" games
+
+        * Question: do we end up with two endpoints (/game and /done) or a single endpoint of /game,
+          which returns the appropriate template ("blackjack.html" or "done.html")
+            * Upside of no /done endpoint is can't accidentally display invalid state (i.e., when the game is NOT done)
 
     [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
         Refactor/extract from GameService
+
     [ ] If desired, use real database
+
+    -- Done --
 
     [X] Add intermediary: GameService, all commands/queries go through the service
     [X] Assign IDs to Game: have all GET/POST include that ID
