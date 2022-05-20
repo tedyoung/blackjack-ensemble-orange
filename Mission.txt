@@ -4,21 +4,26 @@
 
 1. Multiple simultaneous Games (multiple games of single players vs. dealer)
 
-    [X] Add intermediary: GameService, all commands/queries go through the service
-    [>>] Assign IDs to Game: have all GET/POST include that ID
-         Next Step: in BlackjackController/GameService:
-           --> Add ID to POST URL in the HTML's action
-            -> Make all POST handlers use the incoming ID (from the URL)
+    [ ] Slight behavior change: maybe consolidate doneView into gameView such that any hit of /game/{gameId} will show the correct state for "done" games
+        * Question: do we end up with two endpoints (/game and /done) or a single endpoint of /game, which returns the appropriate template ("blackjack.html" or "done.html")
+            * Upside of no /done endpoint is can't display invalid state
 
-            -> Eventually, stop using the field `gameId` in the BlackjackController to hold onto a Game ID
-            (push the constant out of GameService to the caller)
-
-            -> goal is to get rid of currentGame and replace it with gameFor(id)
-            use the ID in redirect (returned from the POST) and as input from GET requests
-                -> GET to /done needs game ID
     [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
         Refactor/extract from GameService
     [ ] If desired, use real database
+
+    [X] Add intermediary: GameService, all commands/queries go through the service
+    [X] Assign IDs to Game: have all GET/POST include that ID
+        Next Step: in BlackjackController/GameService:
+        [X] Add ID to POST URL in the HTML's action
+        [X] Make all POST handlers use the incoming ID (from the URL)
+
+        [X] Eventually, stop using the field `gameId` in the BlackjackController to hold onto a Game ID
+        (push the constant out of GameService to the caller)
+
+        [X] goal is to get rid of currentGame and replace it with gameFor(id)
+        use the ID in redirect (returned from the POST) and as input from GET requests
+            -> GET to /done needs game ID
 
 ## Other Feature Options
 
