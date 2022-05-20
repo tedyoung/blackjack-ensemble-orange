@@ -31,6 +31,9 @@
         use the ID in redirect (returned from the POST) and as input from GET requests
             -> GET to /done needs game ID
 
+## Bugs
+- Both dealer cards are face up while game is in progress (hole card should be face down)
+
 ## Other Feature Options
 
 2. Add Betting support
