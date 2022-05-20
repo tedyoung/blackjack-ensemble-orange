@@ -28,28 +28,22 @@ public class BlackjackController {
 
     @GetMapping("/game/{gameId}")
     public String gameView(Model model, @PathVariable Long gameId) {
-        populateGameViewIn(model, gameId);
-        if(gameService.isPlayerDone(gameId)){
-            model.addAttribute("outcome", gameService.gameOutcome(gameId).display());
-            return "game-over";
+        if (gameService.isPlayerDone(gameId)) {
+            return gameOverView(model, gameId);
+        } else {
+            return gameInProgressView(model, gameId);
         }
+    }
+
+    private String gameInProgressView(Model model, Long gameId) {
+        populateGameViewIn(model, gameId);
         return "game-in-progress";
     }
 
-    @PostMapping("/hit/{gameId}")
-    public String hitCommand(@PathVariable Long gameId) {
-        gameService.playerHits(gameId);
-        return redirectToGamePage(gameId);
-    }
-
-    private String redirectToGamePage(Long gameId) {
-        return "redirect:/game/" + gameId;
-    }
-
-    @PostMapping("/stand/{gameId}")
-    public String standCommand(@PathVariable Long gameId) {
-        gameService.playerStands(gameId);
-        return redirectToGamePage(gameId);
+    private String gameOverView(Model model, Long gameId) {
+        populateGameViewIn(model, gameId);
+        model.addAttribute("outcome", gameService.gameOutcome(gameId).display());
+        return "game-over";
     }
 
     private void populateGameViewIn(Model model, Long gameId) {
@@ -58,4 +52,19 @@ public class BlackjackController {
         model.addAttribute("gameId", gameId);
     }
 
+    @PostMapping("/hit/{gameId}")
+    public String hitCommand(@PathVariable Long gameId) {
+        gameService.playerHits(gameId);
+        return redirectToGamePage(gameId);
+    }
+
+    @PostMapping("/stand/{gameId}")
+    public String standCommand(@PathVariable Long gameId) {
+        gameService.playerStands(gameId);
+        return redirectToGamePage(gameId);
+    }
+
+    private String redirectToGamePage(Long gameId) {
+        return "redirect:/game/" + gameId;
+    }
 }

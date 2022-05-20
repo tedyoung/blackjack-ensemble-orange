@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
-    public void startGameResultsInTwoCardsDealtToPlayer() throws Exception {
+    public void startGameCreatesGameAndDoesInitialDeal() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
         GameService gameService = new GameService(deck, new GameIdGenerator(41));
         BlackjackController blackjackController = new BlackjackController(gameService);
@@ -55,10 +55,8 @@ class BlackjackControllerTest {
         blackjackController.startGame();
         Game game = gameService.gameFor(10L);
 
-        String redirectPage = blackjackController.hitCommand(10L);
+        blackjackController.hitCommand(10L);
 
-        assertThat(redirectPage)
-                .isEqualTo("redirect:/game/10");
         assertThat(game.playerHand().cards())
                 .hasSize(3);
         assertThat(game.isPlayerDone())
@@ -77,7 +75,6 @@ class BlackjackControllerTest {
         Game game = gameService.gameFor(18L);
         assertThat(game.isPlayerDone())
                 .isTrue();
-
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game/18");
     }
@@ -125,7 +122,6 @@ class BlackjackControllerTest {
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game/73");
-
         Game game = gameService.gameFor(73L);
         assertThat(game.isPlayerDone())
                 .isTrue();
