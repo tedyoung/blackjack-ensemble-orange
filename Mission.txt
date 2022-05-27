@@ -3,16 +3,10 @@
 ## Current Feature
 
 1. Multiple simultaneous Games (multiple games of single players vs. dealer)
-
-    [ ] Slight behavior change: consolidate doneView into gameView such that any hit of /game/{gameId}
-        will show the correct state for "done" games
-
-        * Question: do we end up with two endpoints (/game and /done) or a single endpoint of /game,
-          which returns the appropriate template ("blackjack.html" or "done.html")
-            * Upside of no /done endpoint is can't accidentally display invalid state (i.e., when the game is NOT done)
-
     [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
         Refactor/extract from GameService
+
+-->     NEXT: complete the "fix primitive obsession" sequence for InMemoryGameRepository
 
     [ ] If desired, use real database
 
@@ -30,6 +24,12 @@
         [X] goal is to get rid of currentGame and replace it with gameFor(id)
         use the ID in redirect (returned from the POST) and as input from GET requests
             -> GET to /done needs game ID
+    [X] Slight behavior change: consolidate doneView into gameView such that any hit of /game/{gameId}
+            will show the correct state for "done" games
+
+            * Question: do we end up with two endpoints (/game and /done) or a single endpoint of /game,
+              which returns the appropriate template ("blackjack.html" or "done.html")
+                * Upside of no /done endpoint is can't accidentally display invalid state (i.e., when the game is NOT done)
 
 ## Bugs
 - Both dealer cards are face up while game is in progress (hole card should be face down)

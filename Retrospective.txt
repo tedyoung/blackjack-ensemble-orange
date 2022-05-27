@@ -1,3 +1,22 @@
+Retrospective: Ensemble FRI-PM #7 (May 20, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Nice to read through tests after refactoring to see that they still make sense, no duplication
+    Nice to relax the driver/navigator and do some things (test review) in the Huddle
+        Good to have more opinions for that kind of work
+        Nice to reduce/eliminate some redundant assertions on the redirect
+            Using the manual mutation testing to see what tests would fail and evaluate: keep or remove assertion
+    It’s hard to avoid jumping to making big changes vs. smaller steps
+    Extract methods and then form a new class vs. create the new class and find out what to move
+        Fix Primitive Obsession
+    Nice start on the Repository: refactor our way to it
+        Hex Arch reminds us where things go
+    When confused and you figure it out, make it so that you won’t be confused the same way in the future
+        Not always easy
+Learnings
+    Navigation: announce “Left” or “Right” pane instead of the name of the class, so the Driver knows more quickly what you’re talking about
+    Navigator: start with high-level intent, only provide more details when Driver needs them
+
 Retrospective: Ensemble FRI-PM #6 (May 13, 2022)
 ------------------------------------------------
 Thoughts, Observations
@@ -18,7 +37,7 @@ Thoughts, Observations
 Learnings
     Commit using IJ via CMD+K
         Two choices: modal or tool window
-Next Time
+
 
 Retrospective: Ensemble FRI-PM #5 (May 6, 2022)
 -----------------------------------------------

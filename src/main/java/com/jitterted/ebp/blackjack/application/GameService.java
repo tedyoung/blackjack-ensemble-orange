@@ -4,14 +4,10 @@ import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameOutcome;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class GameService {
     private final GameIdGenerator gameIdGenerator;
     private final Deck deck;
-    // GameRepository: save, findById
-    private final Map<Long, Game> gameMap = new HashMap<>();
+    private final InMemoryGameRepository inMemoryGameRepository = new InMemoryGameRepository();
 
     public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
         this.deck = deck;
@@ -21,12 +17,12 @@ public class GameService {
     public Game startGame() {
         Game game = new Game(deck);
         game.setId(gameIdGenerator.nextId());
-        gameMap.put(game.getId(), game);
+        inMemoryGameRepository.save(game, this);
         return game;
     }
 
     public Game gameFor(long id) {
-        Game game = gameMap.get(id);
+        Game game = inMemoryGameRepository.findById(id, this);
         if (game == null) {
             throw new GameNotFound();
         }
