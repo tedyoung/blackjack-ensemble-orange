@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.application;
 
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Game;
 
 import java.util.HashMap;
