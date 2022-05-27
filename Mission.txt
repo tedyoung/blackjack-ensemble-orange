@@ -8,6 +8,7 @@
 
 -->     NEXT: complete the "fix primitive obsession" sequence for InMemoryGameRepository
 
+    [ ] Create a proper Repository interface (PORT)
     [ ] If desired, use real database
 
     -- Done --
