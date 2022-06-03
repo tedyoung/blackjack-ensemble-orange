@@ -5,7 +5,7 @@ import com.jitterted.ebp.blackjack.domain.Game;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryGameRepository {// GameRepository: save, findById
+public class InMemoryGameRepository {
     private final Map<Long, Game> gameMap = new HashMap<Long, Game>();
 
     public Map<Long, Game> getGameMap() {
