@@ -8,24 +8,10 @@ import java.util.Map;
 
 public class InMemoryGameRepository implements GameRepository {
     private final Map<Long, Game> gameMap = new HashMap<>();
-    private GameIdGenerator gameIdGenerator;
-
-    public InMemoryGameRepository() {
-        this.gameIdGenerator = new GameIdGenerator(0);
-    }
-
-    public InMemoryGameRepository(GameIdGenerator gameIdGenerator) {
-        this.gameIdGenerator = gameIdGenerator;
-    }
 
     @Override
     public Game save(Game game) {
-        if (game.getId() == null) {
-            long gameId = gameIdGenerator.nextId();
-            game.setId(gameId);
-        }
-        gameMap.put(game.getId(), game);
-        return game;
+        return gameMap.put(game.getId(), game);
     }
 
     @Override

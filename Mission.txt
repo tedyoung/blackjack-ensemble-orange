@@ -4,16 +4,7 @@
 
 1. Multiple simultaneous Games (multiple games of single players vs. dealer)
 
-
     [ ] Real database implementation of GameRepository
-
-         Second test: test that update does NOT assign a new ID
-
-         OR
-
-NEXT TIME:
-==========
-    [ ] Try it again and see what happens?
 
     -- Done --
 
