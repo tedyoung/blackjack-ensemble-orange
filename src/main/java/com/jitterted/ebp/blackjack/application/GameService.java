@@ -7,7 +7,7 @@ import com.jitterted.ebp.blackjack.domain.GameOutcome;
 public class GameService {
     private final GameIdGenerator gameIdGenerator;
     private final Deck deck;
-    private final GameRepository gameRepository = new InMemoryGameRepository();
+    private final InMemoryGameRepository inMemoryGameRepository = new InMemoryGameRepository();
 
     public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
         this.deck = deck;
@@ -17,12 +17,12 @@ public class GameService {
     public Game startGame() {
         Game game = new Game(deck);
         game.setId(gameIdGenerator.nextId());
-        gameRepository.save(game);
+        inMemoryGameRepository.save(game, this);
         return game;
     }
 
     public Game gameFor(long id) {
-        Game game = gameRepository.findById(id);
+        Game game = inMemoryGameRepository.findById(id, this);
         if (game == null) {
             throw new GameNotFound();
         }
