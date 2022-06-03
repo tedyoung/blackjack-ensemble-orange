@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.application;
 
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class InMemoryGameRepositoryTest {
 
     @Test
     void savedGameCanBeFoundById() {
-        InMemoryGameRepository gameRepository = new InMemoryGameRepository();
+        GameRepository gameRepository = new InMemoryGameRepository();
         Game game = new Game(new Deck());
         game.setId(12L);
 
@@ -24,7 +25,7 @@ class InMemoryGameRepositoryTest {
 
     @Test
     void saveGameReturnsSameGame() {
-        InMemoryGameRepository gameRepository = new InMemoryGameRepository();
+        GameRepository gameRepository = new InMemoryGameRepository();
         Game game = new Game(new Deck());
         game.setId(12L);
 
@@ -36,7 +37,7 @@ class InMemoryGameRepositoryTest {
     
     @Test
     void findingNotSavedGameByIdReturnsEmptyOptional() throws Exception {
-        InMemoryGameRepository emptyGameRepository = new InMemoryGameRepository();
+        GameRepository emptyGameRepository = new InMemoryGameRepository();
 
         Optional<Game> foundGame = emptyGameRepository.findById(14L);
 

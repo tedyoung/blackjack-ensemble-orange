@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.application;
 
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameOutcome;
@@ -7,7 +8,7 @@ import com.jitterted.ebp.blackjack.domain.GameOutcome;
 public class GameService {
     private final GameIdGenerator gameIdGenerator;
     private final Deck deck;
-    private final InMemoryGameRepository inMemoryGameRepository = new InMemoryGameRepository();
+    private final GameRepository gameRepository = new InMemoryGameRepository();
 
     public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
         this.deck = deck;
@@ -17,13 +18,13 @@ public class GameService {
     public Game startGame() {
         Game game = new Game(deck);
         game.setId(gameIdGenerator.nextId());
-        inMemoryGameRepository.save(game);
+        gameRepository.save(game);
         return game;
     }
 
     public Game gameFor(long id) {
-        return inMemoryGameRepository.findById(id)
-                                     .orElseThrow(GameNotFound::new);
+        return gameRepository.findById(id)
+                             .orElseThrow(GameNotFound::new);
     }
 
     public void initialDeal(long gameId) {
