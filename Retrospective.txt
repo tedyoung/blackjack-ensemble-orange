@@ -1,3 +1,22 @@
+Retrospective: Ensemble FRI-PM #8 (May 27, 2022)
+------------------------------------------------
+Thoughts, Observations
+    What a ride!
+    It’s really easy to get simple code wrong
+        As well as overlooking a failing test?
+    Sunk cost/loss aversion is real
+        Should have reverted to a previous green commit?
+    Still not sure how to decouple the ID generator from our tests and “push in” to the in memory repo
+        Maybe those tests could be refactored first to get out of the situation
+    Repository interface “contract” test
+        Base class runs against whatever instance defined in the subclass
+Learnings
+    Saff Squeeze was neat
+        No debugger needed!
+Next Time
+    Even more save point commits??
+
+
 Retrospective: Ensemble FRI-PM #7 (May 20, 2022)
 ------------------------------------------------
 Thoughts, Observations
