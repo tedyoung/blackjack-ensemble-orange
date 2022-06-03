@@ -17,16 +17,13 @@ public class GameService {
     public Game startGame() {
         Game game = new Game(deck);
         game.setId(gameIdGenerator.nextId());
-        inMemoryGameRepository.save(game, this);
+        inMemoryGameRepository.save(game);
         return game;
     }
 
     public Game gameFor(long id) {
-        Game game = inMemoryGameRepository.findById(id, this);
-        if (game == null) {
-            throw new GameNotFound();
-        }
-        return game;
+        return inMemoryGameRepository.findById(id)
+                                     .orElseThrow(GameNotFound::new);
     }
 
     public void initialDeal(long gameId) {

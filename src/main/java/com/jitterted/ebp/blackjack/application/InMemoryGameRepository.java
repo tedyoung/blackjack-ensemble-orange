@@ -4,20 +4,17 @@ import com.jitterted.ebp.blackjack.domain.Game;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryGameRepository {
-    private final Map<Long, Game> gameMap = new HashMap<Long, Game>();
+    private final Map<Long, Game> gameMap = new HashMap<>();
 
-    public Map<Long, Game> getGameMap() {
-        return gameMap;
-    }
-
-    Game save(Game game, GameService gameService) {
-        return getGameMap().put(game.getId(), game);
-    }
-
-    Game findById(long id, GameService gameService) {
-        Game game = getGameMap().get(id);
+    Game save(Game game) {
+        gameMap.put(game.getId(), game);
         return game;
+    }
+
+    Optional<Game> findById(long id) {
+        return Optional.ofNullable(gameMap.get(id));
     }
 }
