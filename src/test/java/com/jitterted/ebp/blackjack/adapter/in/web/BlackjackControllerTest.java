@@ -19,7 +19,9 @@ class BlackjackControllerTest {
     @Test
     public void startGameCreatesGameAndDoesInitialDeal() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        GameService gameService = new GameService(deck, new GameIdGenerator(41), new InMemoryGameRepository());
+        GameService gameService = new GameService(deck,
+                                                  new InMemoryGameRepository(
+                                                          new GameIdGenerator(41)));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         final String redirectPage = blackjackController.startGame();
@@ -34,7 +36,7 @@ class BlackjackControllerTest {
     @Test
     public void gameViewPopulatesViewModelWithGameViewInstanceAndGameId() throws Exception {
         GameIdGenerator gameIdGenerator = new GameIdGenerator(13L);
-        GameService gameService = new GameService(new Deck(), gameIdGenerator, new InMemoryGameRepository());
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -51,7 +53,7 @@ class BlackjackControllerTest {
     @Test
     public void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
-        GameService gameService = new GameService(deck, new GameIdGenerator(10), new InMemoryGameRepository());
+        GameService gameService = new GameService(deck, new InMemoryGameRepository(new GameIdGenerator(10)));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
         Game game = gameService.gameFor(10L);
@@ -67,7 +69,7 @@ class BlackjackControllerTest {
     @Test
     public void playerHitsGoesBustAndRedirectsToGamePage() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
-        GameService gameService = new GameService(deck, new GameIdGenerator(18), new InMemoryGameRepository());
+        GameService gameService = new GameService(deck, new InMemoryGameRepository(new GameIdGenerator(18)));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -83,7 +85,7 @@ class BlackjackControllerTest {
     @Test
     public void playerHitsForASpecificGame() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
-        GameService gameService = new GameService(deck, new GameIdGenerator(15), new InMemoryGameRepository());
+        GameService gameService = new GameService(deck, new InMemoryGameRepository(new GameIdGenerator(15)));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -101,7 +103,7 @@ class BlackjackControllerTest {
                                                             Rank.TEN, Rank.EIGHT,
                                                             Rank.SEVEN, Rank.JACK,
                                                             Rank.NINE);
-        GameService gameService = new GameService(twoGameDeckForSecondGameHit, new GameIdGenerator(15), new InMemoryGameRepository());
+        GameService gameService = new GameService(twoGameDeckForSecondGameHit, new InMemoryGameRepository(new GameIdGenerator(15)));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
         blackjackController.startGame(); // 16
@@ -115,7 +117,7 @@ class BlackjackControllerTest {
 
     @Test
     public void playerStandsResultsInRedirectToGamePageAndPlayerIsDone() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(73), new InMemoryGameRepository());
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(new GameIdGenerator(73)));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -130,7 +132,7 @@ class BlackjackControllerTest {
 
     @Test
     public void beforeStartGameThenGameForIdOfZeroThrowsAnException() {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0), new InMemoryGameRepository());
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository());
         new BlackjackController(gameService);
 
         assertThatThrownBy(() -> gameService.gameFor(0L))
@@ -139,7 +141,7 @@ class BlackjackControllerTest {
 
     @Test
     public void afterStartGameCurrentGameHasAnId() {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0), new InMemoryGameRepository());
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame();
@@ -151,7 +153,7 @@ class BlackjackControllerTest {
 
     @Test
     void startGameCreatesNewGame() {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0), new InMemoryGameRepository());
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame();
@@ -163,7 +165,7 @@ class BlackjackControllerTest {
 
     @Test
     void gameViewForDoneGameReturnsGameOverTemplateWithOutcome() {
-        GameService gameService = new GameService(StubDeck.playerDealtBlackjack(), new GameIdGenerator(0), new InMemoryGameRepository());
+        GameService gameService = new GameService(StubDeck.playerDealtBlackjack(), new InMemoryGameRepository());
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
@@ -180,7 +182,7 @@ class BlackjackControllerTest {
 
     @Test
     public void gameViewForGameInProgressReturnsGameInProgressTemplate() {
-        GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new GameIdGenerator(0), new InMemoryGameRepository());
+        GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new InMemoryGameRepository());
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
 
