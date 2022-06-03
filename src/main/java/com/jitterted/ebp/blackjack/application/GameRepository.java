@@ -1,4 +1,4 @@
-package com.jitterted.ebp.blackjack.application.port;
+package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.domain.Game;
 

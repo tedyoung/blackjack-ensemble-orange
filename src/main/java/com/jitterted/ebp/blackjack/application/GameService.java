@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.application;
 
-import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameOutcome;
@@ -8,12 +7,11 @@ import com.jitterted.ebp.blackjack.domain.GameOutcome;
 public class GameService {
     private final GameIdGenerator gameIdGenerator;
     private final Deck deck;
-    private final GameRepository gameRepository;
+    private final GameRepository gameRepository = new InMemoryGameRepository();
 
-    public GameService(Deck deck, GameIdGenerator gameIdGenerator, GameRepository gameRepository) {
+    public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
         this.deck = deck;
         this.gameIdGenerator = gameIdGenerator;
-        this.gameRepository = gameRepository;
     }
 
     public Game startGame() {
