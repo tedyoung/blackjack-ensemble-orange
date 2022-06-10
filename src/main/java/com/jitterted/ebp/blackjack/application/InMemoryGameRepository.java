@@ -9,9 +9,17 @@ import java.util.Optional;
 
 public class InMemoryGameRepository implements GameRepository {
     private final Map<Long, Game> gameMap = new HashMap<>();
+    private final GameIdGenerator gameIdGenerator;
+
+    public InMemoryGameRepository(GameIdGenerator gameIdGenerator) {
+        this.gameIdGenerator = gameIdGenerator;
+    }
 
     @Override
     public Game save(Game game) {
+        if (game.getId() == null) {
+            game.setId(gameIdGenerator.nextId());
+        }
         gameMap.put(game.getId(), game);
         return game;
     }
@@ -20,4 +28,5 @@ public class InMemoryGameRepository implements GameRepository {
     public Optional<Game> findById(long id) {
         return Optional.ofNullable(gameMap.get(id));
     }
+
 }

@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.*;
 class InMemoryGameRepositoryTest {
 
     @Test
-    void savedGameCanBeFoundById() {
-        GameRepository gameRepository = new InMemoryGameRepository();
+    void savingGameAlreadyHasIdCanBeFoundById() {
+        GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
         Game game = new Game(new Deck());
         game.setId(12L);
 
@@ -25,7 +25,7 @@ class InMemoryGameRepositoryTest {
 
     @Test
     void saveGameReturnsSameGame() {
-        GameRepository gameRepository = new InMemoryGameRepository();
+        GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
         Game game = new Game(new Deck());
         game.setId(12L);
 
@@ -36,11 +36,22 @@ class InMemoryGameRepositoryTest {
     }
     
     @Test
-    void findingNotSavedGameByIdReturnsEmptyOptional() throws Exception {
-        GameRepository emptyGameRepository = new InMemoryGameRepository();
+    void findingNotSavedGameByIdReturnsEmptyOptional() {
+        GameRepository emptyGameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
 
         Optional<Game> foundGame = emptyGameRepository.findById(14L);
 
         assertThat(foundGame).isEmpty();
+    }
+
+    @Test
+    void savingNewGameAssignsAnId() {
+        GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(12L));
+        Game game = new Game(new Deck());
+
+        gameRepository.save(game);
+
+        assertThat(gameRepository.findById(12L))
+                .contains(game);
     }
 }

@@ -6,18 +6,16 @@ import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameOutcome;
 
 public class GameService {
-    private final GameIdGenerator gameIdGenerator;
     private final Deck deck;
-    private final GameRepository gameRepository = new InMemoryGameRepository();
+    private final GameRepository gameRepository;
 
-    public GameService(Deck deck, GameIdGenerator gameIdGenerator) {
+    public GameService(Deck deck, GameRepository gameRepository) {
         this.deck = deck;
-        this.gameIdGenerator = gameIdGenerator;
+        this.gameRepository = gameRepository;
     }
 
     public Game startGame() {
         Game game = new Game(deck);
-        game.setId(gameIdGenerator.nextId());
         gameRepository.save(game);
         return game;
     }

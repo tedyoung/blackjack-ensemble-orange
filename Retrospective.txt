@@ -1,3 +1,41 @@
+Retrospective: Ensemble FRI-PM #9 (June 3, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Doing it the “right” way seemed slower?
+    Doing it the “right” way seemed to be faster?
+        But we are different people than last time
+        Felt much smoother
+        Lower anxiety than last time
+        Certainly have more tests
+    Still didn't commit as often as we'd like
+    Definitely more fun this way
+        Inlining, pushing out parameters, etc.
+        +1 - refactoring golf
+            how can I change this with just automated refactorings?
+            Automated = generally safer
+    Noticing “feature envy” like things
+        assignId, save => assignAndSave
+            Move
+    Noticed behavior changing (or needing to change) with failing test for Game having ID already assigned upon save
+    Using Optional correctly (like a “lightweight” collection)
+    Smaller steps, writing tests more often as noticing they were needed
+    Sometimes we noticed we needed to prepare before making a change
+    Trying different ways
+        Back up and try something else
+Learnings
+    F6 to move (requires parameters pushed out)
+    CTRL+F6 (CMD+F6) to change signature
+    Move initialization of field to constructor
+    orElse(GameNotFound::new)
+        ::new as a supplier
+    Reminded that map.put() returns the object that it REPLACED (or null)
+Next Time
+    Notice when we’ve gone from RED to GREEN or code change GREEN to GREEN
+        Ask “commit now?” after every refactor STEP
+        ACN
+    Close the unneeded windows, especially after `mob start` and when tests pass
+
+
 Retrospective: Ensemble FRI-PM #8 (May 27, 2022)
 ------------------------------------------------
 Thoughts, Observations

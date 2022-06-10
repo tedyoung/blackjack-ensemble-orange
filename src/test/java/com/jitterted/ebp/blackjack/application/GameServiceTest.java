@@ -10,7 +10,8 @@ class GameServiceTest {
 
     @Test
     public void startGameForTheGivenDeck() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
 
         Game game = gameService.startGame();
 
@@ -20,7 +21,8 @@ class GameServiceTest {
 
     @Test
     public void startGameCreatesNewGameEveryTime() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
         Game game1 = gameService.startGame();
 
         Game game2 = gameService.startGame();
@@ -31,7 +33,8 @@ class GameServiceTest {
 
     @Test
     public void getGameByIdReturnsTheCorrectGame() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
         Game startedGame = gameService.startGame();
 
         Game foundGame = gameService.gameFor(startedGame.getId());
@@ -42,7 +45,8 @@ class GameServiceTest {
 
     @Test
     public void getGameByIdThrowsGameNotFoundExceptionWhenIdDoesNotExist() throws Exception {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
 
         assertThatThrownBy(() -> gameService.gameFor(0L))
                 .isInstanceOf(GameNotFound.class);
@@ -50,7 +54,8 @@ class GameServiceTest {
 
     @Test
     public void startMultipleGamesCanFindFirstOne() {
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(0));
+        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
         Game firstGame = gameService.startGame();
         gameService.startGame();
         gameService.startGame();
@@ -63,7 +68,8 @@ class GameServiceTest {
 
     @Test
     public void startGameAssignsIdFromGenerator(){
-        GameService gameService = new GameService(new Deck(), new GameIdGenerator(42L));
+        final GameIdGenerator gameIdGenerator = new GameIdGenerator(42L);
+        GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
         Game game = gameService.startGame();
 
         assertThat(game.getId())

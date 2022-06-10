@@ -6,13 +6,17 @@
 
 NEXT TIME:
 ==========
-    [ ] Try it again and see what happens?
+    [X] Try it again and see what happens?
 
-        [ ] Use the ID with a GameRepository (in-memory) to load/store the multiple games
+        [X] Use the ID with a GameRepository (in-memory) to load/store the multiple games
                 Refactor/extract from GameService
-        [ ] Create a proper Repository interface (PORT)
+        [X] Create a proper Repository interface (PORT)
 
+    [ ] Simulate a real database by returning different object instances for the same Game ID
+        (this will force us to save changes to the game made inside the command methods in GameService)
 
+FUTURE:
+=======
 
     [ ] Real database implementation of GameRepository
 
