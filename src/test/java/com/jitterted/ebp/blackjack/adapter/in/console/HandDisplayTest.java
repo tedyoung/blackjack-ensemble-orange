@@ -14,7 +14,7 @@ class HandDisplayTest {
 
     @Test
     public void displayFirstCard() throws Exception {
-        Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.ACE)));
+        Hand hand = new Hand(List.of(new Card(Rank.ACE, Suit.HEARTS)));
 
         assertThat(ConsoleHand.displayFirstCard(hand))
                 .isEqualTo("[31m┌─────────┐[1B[11D│A        │[1B[11D│         │[1B[11D│    ♥    │[1B[11D│         │[1B[11D│        A│[1B[11D└─────────┘");
@@ -22,8 +22,8 @@ class HandDisplayTest {
 
     @Test
     public void cardsAsStringTransformsWholeHandToDisplayString() throws Exception {
-        Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.NINE),
-                                     new Card(Suit.SPADES, Rank.THREE)));
+        Hand hand = new Hand(List.of(new Card(Rank.NINE, Suit.HEARTS),
+                                     new Card(Rank.THREE, Suit.SPADES)));
 
         assertThat(ConsoleHand.cardsAsString(hand))
                 .isEqualTo("[31m┌─────────┐[1B[11D│9        │[1B[11D│         │[1B[11D│    ♥    │[1B[11D│         │[1B[11D│        9│[1B[11D└─────────┘[6A[1C[30m┌─────────┐[1B[11D│3        │[1B[11D│         │[1B[11D│    ♠    │[1B[11D│         │[1B[11D│        3│[1B[11D└─────────┘");

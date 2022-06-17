@@ -24,7 +24,7 @@ public class DeckEncoderTest {
 
     @Test
     public void deckWithOneCardEncodedAsCardString() throws Exception {
-        Deck deck = new StubDeck(List.of(new Card(Suit.HEARTS, Rank.TEN)));
+        Deck deck = new StubDeck(List.of(new Card(Rank.TEN, Suit.HEARTS)));
 
         String encodedDeck = Encoder.encode(deck);
 
@@ -34,8 +34,8 @@ public class DeckEncoderTest {
 
     @Test
     public void deckWithTwoCardsEncodedAsCommaSeparatedTwoCardString() throws Exception {
-        Deck deck = new StubDeck(List.of(new Card(Suit.HEARTS, Rank.TEN),
-                                         new Card(Suit.HEARTS, Rank.ACE)));
+        Deck deck = new StubDeck(List.of(new Card(Rank.TEN, Suit.HEARTS),
+                                         new Card(Rank.ACE, Suit.HEARTS)));
 
         String encodedDeck = Encoder.encode(deck);
 

@@ -14,7 +14,7 @@ public class StubDeck extends Deck {
     public StubDeck(Rank... ranks) {
         this.cards = new ArrayList<>();
         for (Rank rank : ranks) {
-            cards.add(new Card(DUMMY_SUIT, rank));
+            cards.add(new Card(rank, DUMMY_SUIT));
         }
     }
 

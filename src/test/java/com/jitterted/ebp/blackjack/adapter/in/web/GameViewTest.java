@@ -16,10 +16,10 @@ public class GameViewTest {
 
     @Test
     public void gameViewPopulatesViewModelWithAllCards() throws Exception {
-        Deck stubDeck = new StubDeck(List.of(new Card(Suit.DIAMONDS, Rank.TEN),
-                                             new Card(Suit.HEARTS, Rank.TWO),
-                                             new Card(Suit.DIAMONDS, Rank.KING),
-                                             new Card(Suit.CLUBS, Rank.THREE)));
+        Deck stubDeck = new StubDeck(List.of(new Card(Rank.TEN, Suit.DIAMONDS),
+                                             new Card(Rank.TWO, Suit.HEARTS),
+                                             new Card(Rank.KING, Suit.DIAMONDS),
+                                             new Card(Rank.THREE, Suit.CLUBS)));
         Game game = new Game(stubDeck);
         game.initialDeal();
 

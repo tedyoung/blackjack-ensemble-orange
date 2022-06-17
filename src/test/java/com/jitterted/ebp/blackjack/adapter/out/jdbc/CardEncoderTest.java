@@ -16,7 +16,7 @@ public class CardEncoderTest {
     @ParameterizedTest
     @MethodSource("cardSupplier")
     public void cardIsEncodedAsString(Suit suit, Rank rank, String expectedEncoding) throws Exception {
-        Card card = new Card(suit, rank);
+        Card card = new Card(rank, suit);
 
         String encodedCard = CardEncoder.encode(card);
 

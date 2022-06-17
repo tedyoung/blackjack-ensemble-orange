@@ -38,7 +38,7 @@ public class HandValueAceTest {
     private Hand createHand(Rank... ranks) {
         List<Card> cards = new ArrayList<>();
         for (Rank rank : ranks) {
-            cards.add(new Card(DUMMY_SUIT, rank));
+            cards.add(new Card(rank, DUMMY_SUIT));
         }
         return new Hand(cards);
     }

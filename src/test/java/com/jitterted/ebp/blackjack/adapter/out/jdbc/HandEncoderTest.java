@@ -24,7 +24,7 @@ public class HandEncoderTest {
 
     @Test
     void handWithOneCardIsEncodedAsSingleCardString() {
-        Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.JACK)));
+        Hand hand = new Hand(List.of(new Card(Rank.JACK, Suit.HEARTS)));
 
         String encodedHand = Encoder.encode(hand);
 
