@@ -1,3 +1,28 @@
+Retrospective: Ensemble FRI-PM #10 (June 10, 2022)
+--------------------------------------------------
+Thoughts/Observations
+    DB representation of the Game, with the Hand, Deck, and Cards is more complex than initially thought
+    Liked keeping it simple to start (encoding cards as string) instead of full set of tables
+    Struggling with not going directly to a design that’s in my head
+        Letting the TDD have the design emerge
+        Refactoring to more elements before they’re needed keeps the code simpler
+    Struggled with the first “blank screen” test for completely new behavior
+        Parameterized tests helped triangulate to a Map
+        Starting with inline code in the test method, then extract to method, then move to its own class
+    Enjoyed focusing on the Card Encoder
+    Typing worse than usual as Driver
+    Card definition order
+        Had assumptions about importance of order of parameters, Suit & Rank
+    Breaking the work down into tiny pieces makes it easier to make progress
+        Planning a list of things to do doesn’t mean we have to stick to that plan, but is useful
+Learnings
+    Map.ofEntries() when there’s more than 10 elements
+    JPA (Hibernate) is very complex vs. Spring Data JDBC
+    Don’t forget Change Signature refactoring
+Next Time
+    Turn on “Select first failed test when finished” in the Run window
+
+
 Retrospective: Ensemble FRI-PM #9 (June 3, 2022)
 ------------------------------------------------
 Thoughts, Observations

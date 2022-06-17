@@ -2,30 +2,37 @@
 
 ## Current Feature
 
-1. Multiple simultaneous Games (multiple games of single players vs. dealer)
+NEXT:
+=====
 
-NEXT TIME:
-==========
-    [X] Try it again and see what happens?
+    [ ] Real database implementation of GameRepository using Spring Data JDBC
 
-        [X] Use the ID with a GameRepository (in-memory) to load/store the multiple games
-                Refactor/extract from GameService
-        [X] Create a proper Repository interface (PORT)
+        [X] 1. Add dependencies: Spring Data JDBC, Flyway, Postgresql, Testcontainer
+        [ ] 2. Create DBOs (w/schemas)
+               [X] Encode Card
+NEXT-->        [ ] Encode Deck (currently failing test)
+        [ ] 3. Tests for mapping to/from Domain Object <-> DBO
+        [ ] 4. Write JdbcRepository tests to store/find DBOs
 
-    [ ] Simulate a real database by returning different object instances for the same Game ID
-        (this will force us to save changes to the game made inside the command methods in GameService)
+Database:
+Games:
+Id -> long
+Deck -> String of encoded cards -> text
+        AH,TC
+PlayerHand -> String of encoded cards -> text
+DealerHand -> String of encoded cards -> text
+isPlayerDone -> boolean
+
+Reminder:  test that update does NOT assign a new ID
+
 
 FUTURE:
 =======
 
-    [ ] Real database implementation of GameRepository
+    [ ] Simulate a real database by returning different object instances for the same Game ID
+        (this will force us to save changes to the game made inside the command methods in GameService)
 
-         Second test: test that update does NOT assign a new ID
-
-         OR
-
-
-    -- Done --
+## Done
 
     [X] Add intermediary: GameService, all commands/queries go through the service
     [X] Assign IDs to Game: have all GET/POST include that ID
@@ -45,6 +52,12 @@ FUTURE:
             * Question: do we end up with two endpoints (/game and /done) or a single endpoint of /game,
               which returns the appropriate template ("blackjack.html" or "done.html")
                 * Upside of no /done endpoint is can't accidentally display invalid state (i.e., when the game is NOT done)
+
+    [X] Try it again and see what happens?
+
+        [X] Use the ID with a GameRepository (in-memory) to load/store the multiple games
+                Refactor/extract from GameService
+        [X] Create a proper Repository interface (PORT)
 
 ## Bugs
 - Both dealer cards are face up while game is in progress (hole card should be face down)
