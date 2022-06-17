@@ -3,9 +3,10 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Deck {
-    private final List<Card> cards = new ArrayList<>();
+    protected List<Card> cards = new ArrayList<>();
 
     public Deck() {
         for (Suit suit : Suit.values()) {
@@ -22,5 +23,9 @@ public class Deck {
 
     public Card draw() {
         return cards.remove(0);
+    }
+
+    public Stream<Card> allCards() {
+        return cards.stream();
     }
 }

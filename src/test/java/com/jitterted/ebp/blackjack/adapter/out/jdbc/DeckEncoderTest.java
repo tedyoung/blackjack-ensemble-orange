@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.*;
 public class DeckEncoderTest {
     @Test
     public void emptyDeckEncodedAsEmptyString() throws Exception {
-        Deck deck = new Deck();
+        Deck deck = new StubDeck();
 
-        String encodedDeck = DeckEncoder.encode(deck);
+        String encodedDeck = Encoder.encode(deck);
 
         assertThat(encodedDeck)
                 .isEmpty();
@@ -26,16 +26,21 @@ public class DeckEncoderTest {
     public void deckWithOneCardEncodedAsCardString() throws Exception {
         Deck deck = new StubDeck(List.of(new Card(Suit.HEARTS, Rank.TEN)));
 
-        String encodedDeck = DeckEncoder.encode(deck);
+        String encodedDeck = Encoder.encode(deck);
 
         assertThat(encodedDeck)
                 .isEqualTo("TH");
     }
 
-    public static class DeckEncoder {
+    @Test
+    public void deckWithTwoCardsEncodedAsCommaSeparatedTwoCardString() throws Exception {
+        Deck deck = new StubDeck(List.of(new Card(Suit.HEARTS, Rank.TEN),
+                                         new Card(Suit.HEARTS, Rank.ACE)));
 
-        public static String encode(Deck deck) {
-            return "";
-        }
+        String encodedDeck = Encoder.encode(deck);
+
+        assertThat(encodedDeck)
+                .isEqualTo("TH,AH");
     }
+
 }

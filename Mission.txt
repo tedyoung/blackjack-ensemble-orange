@@ -8,20 +8,22 @@ NEXT:
     [ ] Real database implementation of GameRepository using Spring Data JDBC
 
         [X] 1. Add dependencies: Spring Data JDBC, Flyway, Postgresql, Testcontainer
-        [ ] 2. Create DBOs (w/schemas)
+        [ ] 2. Create GameDbo (w/schemas)
                [X] Encode Card
-NEXT-->        [ ] Encode Deck (currently failing test)
+               [X] Encode Deck (currently failing test)
+NEXT-->        [ ] Encode Hand
+               [ ] Create GameDbo
         [ ] 3. Tests for mapping to/from Domain Object <-> DBO
         [ ] 4. Write JdbcRepository tests to store/find DBOs
 
 Database:
 Games:
-Id -> long
-Deck -> String of encoded cards -> text
+Id : long
+Deck : String -> String of encoded cards -> text
         AH,TC
-PlayerHand -> String of encoded cards -> text
-DealerHand -> String of encoded cards -> text
-isPlayerDone -> boolean
+PlayerHand : String -> String of encoded cards -> text
+DealerHand : String -> String of encoded cards -> text
+isPlayerDone : boolean
 
 Reminder:  test that update does NOT assign a new ID
 
