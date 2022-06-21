@@ -10,9 +10,12 @@ NEXT:
         [X] 1. Add dependencies: Spring Data JDBC, Flyway, Postgresql, Testcontainer
         [ ] 2. Create GameDbo (w/schemas)
                [X] Encode Card
-               [X] Encode Deck (currently failing test)
-NEXT-->        [ ] Encode Hand
-               [ ] Create GameDbo
+               [X] Encode Deck
+               [X] Encode Hand
+IN PROGRESS--> [ ] Create GameDbo
+                    [ ] isPlayerDone -- pick it up with fails to compile in GameDboTest
+                    [ ] Encode the Deck into a String property
+                    [ ] Convert Encoder methods to non-static
         [ ] 3. Tests for mapping to/from Domain Object <-> DBO
         [ ] 4. Write JdbcRepository tests to store/find DBOs
 

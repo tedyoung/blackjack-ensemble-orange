@@ -13,7 +13,7 @@ public class Encoder {
         return encode(cards);
     }
 
-    public static String encode(Deck deck) {
+    static String encode(Deck deck) {
         return encode(deck.allCards());
     }
 

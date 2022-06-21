@@ -1,3 +1,31 @@
+Retrospective: Ensemble FRI-PM #11 (June 17, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Returning Stream instead of List for cards was a good idea, show that it’s read-only
+        Tension between encapsulation and allowing state to be retrieved for persistence
+    Adapter methods/classes don’t need to be public (except for framework needs)
+    Extract class from Test code requires two Moves: one to move to top level, another to move into production code directory.
+    Refactor: find and replace duplicates
+    Getting the test passing, even if by fluke, is fine.
+    Didn’t have to type and misspell rank!
+    StubDeck has dummy suit, so may not be obvious for what test assertions
+    Cleanup
+        Nice cleanup of StubDeck/Deck implementation
+            Made Cards list protected (and non-final) instead of private
+                Inheritance pushes us this way
+        Finally fixed Card constructor order (faced our confusion and resolved it) so it makes sense: Rank then Suit
+    Name classes for what makes sense now and try not to predict the future
+Learnings
+    Ctrl+P view parameter list for method/constructor (Cmd+P)
+    For method with varargs, passing in nothing (no parameters) results in an array of length 0
+        So we could remove empty constructor as redundant
+Next Time
+    Calculate in DB how many games won/lost by player
+    Maybe add outcome in DB model
+    Close tool windows when done (Cmd+Shift+F12 or Ctrl+Shift+F12)
+    Try and wait for prediction before running tests (so hard!)
+
+
 Retrospective: Ensemble FRI-PM #10 (June 10, 2022)
 --------------------------------------------------
 Thoughts/Observations
