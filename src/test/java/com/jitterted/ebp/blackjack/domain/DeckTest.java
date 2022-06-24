@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
@@ -51,6 +52,20 @@ class DeckTest {
 
         assertThat(drawnCards)
                 .hasSize(52);
+    }
+
+    @Test
+    public void canCreateDeckFromSpecificCards() {
+        List<Card> cards = List.of(new Card(Rank.TWO, Suit.HEARTS),
+                                   new Card(Rank.ACE, Suit.SPADES));
+
+        Deck deck = new Deck(cards);
+
+        assertThat(deck.size())
+                .isEqualTo(2);
+        assertThat(deck.allCards())
+                .containsExactly(new Card(Rank.TWO, Suit.HEARTS),
+                                 new Card(Rank.ACE, Suit.SPADES));
     }
 
 }

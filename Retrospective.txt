@@ -1,3 +1,26 @@
+Retrospective: Ensemble FRI-PM #12 (June 24, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Changing direction: working on Deck first, instead of Dealer Hand
+        They’re orthogonal, so not much of a different which to do first
+            New Deck constructor was needed, vs new Game constructor (to take DealerHand) would be needed
+    Predicting before running tests more often
+    Separate the generation of the cards from the “holding” of the cards (Deck)
+        Separate class for creating a list of cards
+    Prepare refactor (extract field)
+    Ignored test: danger may forget to unignore it!
+        Don’t comment out when moving between layers
+        Two tests failing at different boundaries is “ok”, at the same boundary
+    Interesting to see errors in writing the Test, then noticing the test failing NOT as expected
+        In addition the error in the code made it a bit harder to see
+            When lost: Delete code and test and try again
+    Tests are easier at “lower/inner” layers
+        Testing/coding closer to the object is easier
+Learnings
+Next Time
+    Can we introduce a Decoder (stub) object
+
+
 Retrospective: Ensemble FRI-PM #11 (June 17, 2022)
 --------------------------------------------------
 Thoughts, Observations

@@ -12,10 +12,12 @@ NEXT:
                [X] Encode Card
                [X] Encode Deck
                [X] Encode Hand
-IN PROGRESS--> [ ] Create GameDbo
-                    [ ] isPlayerDone -- pick it up with fails to compile in GameDboTest
-                    [ ] Encode the Deck into a String property
-                    [ ] Convert Encoder methods to non-static
+               [ ] Create GameDbo
+                    [X] isPlayerDone -- pick it up with fails to compile in GameDboTest
+                    [X] Encode the Deck into a String property
+                    [ ] (optional) Convert Encoder methods to non-static
+IN PROGRESS-->      [ ] Decode GameDbo --> Game domain object
+               [ ] Consider converting to memento pattern
         [ ] 3. Tests for mapping to/from Domain Object <-> DBO
         [ ] 4. Write JdbcRepository tests to store/find DBOs
 
@@ -36,6 +38,8 @@ FUTURE:
 
     [ ] Simulate a real database by returning different object instances for the same Game ID
         (this will force us to save changes to the game made inside the command methods in GameService)
+
+    [ ] Use Event-Sourcing to store Games
 
 ## Done
 
@@ -71,4 +75,3 @@ FUTURE:
 
 2. Add Betting support
 3. Support multiple players (one dealer, multiple players)
-4. Persist games to database (requires #2)

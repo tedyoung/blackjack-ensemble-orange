@@ -7,7 +7,7 @@ public class Game {
     private Long id;
     private final Deck deck;
 
-    private final Hand dealerHand = new Hand();
+    private Hand dealerHand = new Hand();
     private final Hand playerHand = new Hand();
     private final GameMonitor gameMonitor;
     private boolean playerDone;
@@ -85,6 +85,10 @@ public class Game {
     public void playerStands() {
         dealerTurn();
         updatePlayerDoneTo(true);
+    }
+
+    public Deck deck() {
+        return deck;
     }
 
     private void updatePlayerDoneTo(boolean playerIsDone) {
