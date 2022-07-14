@@ -42,7 +42,7 @@ public class GameDboTest {
         gameDbo.setDeck("AS,2H");
         gameDbo.setId(42L);
 
-        Game game = gameDbo.toDomain(decoder);
+        Game game = gameDbo.toDomain();
 
         assertThat(game.playerHand().cards())
                 .isEmpty();
@@ -58,15 +58,34 @@ public class GameDboTest {
                 .isEqualTo(42L);
     }
 
-    //    @Test
-//    void gameDboTransformedToGame() {
-//        GameDbo gameDbo = new GameDbo();
-//        gameDbo.setDealerHand("AS,2C");
-//
-//        Game game = gameDbo.toDomain();
-//
-//        assertThat(game.dealerHand().cards())
-//                .containsExactly(new Card(Rank.ACE, Suit.SPADES),
-//                                 new Card(Rank.TWO, Suit.CLUBS));
-//    }
+    @Test
+    public void givenEncodedGameAfterInitialDealDecodesGame() {
+        GameDbo gameDbo = new GameDbo();
+        gameDbo.setPlayerHand("AS,TC");
+        gameDbo.setDealerHand("5H,TS");
+        gameDbo.setPlayerDone(true);
+        gameDbo.setDeck("AS,2H");
+        gameDbo.setId(63L);
+
+        Game game = gameDbo.toDomain();
+
+        assertThat(game.playerHand().cards())
+                .containsExactly(
+                        new Card(Rank.ACE, Suit.SPADES),
+                        new Card(Rank.TEN, Suit.CLUBS)
+                );
+        assertThat(game.dealerHand().cards())
+                .containsExactly(
+                        new Card(Rank.FIVE, Suit.HEARTS),
+                        new Card(Rank.TEN, Suit.SPADES)
+                );
+        assertThat(game.isPlayerDone())
+                .isTrue();
+        assertThat(game.deck().allCards())
+                .containsExactly(
+                        new Card(Rank.ACE, Suit.SPADES),
+                        new Card(Rank.TWO, Suit.HEARTS));
+        assertThat(game.getId())
+                .isEqualTo(63L);
+    }
 }

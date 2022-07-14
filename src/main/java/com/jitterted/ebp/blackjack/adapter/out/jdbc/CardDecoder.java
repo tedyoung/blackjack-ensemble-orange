@@ -4,6 +4,9 @@ import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Suit;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
@@ -34,5 +37,15 @@ public class CardDecoder {
 
     static Card decode(String encoded) {
         return new Card(RANKS.get(encoded.charAt(0)), SUITS.get(encoded.charAt(1)));
+    }
+
+    static List<Card> decodeCards(String encodedCards) {
+        if (encodedCards.isBlank()) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.stream(encodedCards.split(","))
+                     .map(CardDecoder::decode)
+                     .toList();
     }
 }

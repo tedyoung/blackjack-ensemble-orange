@@ -16,10 +16,18 @@ NEXT:
                     [X] isPlayerDone -- pick it up with fails to compile in GameDboTest
                     [X] Encode the Deck into a String property
                     [ ] (optional) Convert Encoder methods to non-static
-IN PROGRESS-->      [ ] Decode GameDbo --> Game domain object
+                    [X] Decode GameDbo --> Game domain object
                [ ] Consider converting to memento pattern
-        [ ] 3. Tests for mapping to/from Domain Object <-> DBO
+        [X] 3. Tests for mapping to/from Domain Object <-> DBO
+NEXT -> [ ] Game: get rid of GameMonitor (to reimplement later using GameService)
         [ ] 4. Write JdbcRepository tests to store/find DBOs
+            [X] Create flyway DDL
+            [X] Created JDBC repository interface
+            [X] Tests for saving and ID assigned
+            [X] Test for finding by ID
+            [ ] Test that all properties were stored
+        [ ] 5. Implement the translation to/from JDBC for the GameRepository interface
+
 
 Database:
 Games:

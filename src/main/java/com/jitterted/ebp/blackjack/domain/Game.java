@@ -7,20 +7,28 @@ public class Game {
     private Long id;
     private final Deck deck;
 
-    private Hand dealerHand = new Hand();
-    private final Hand playerHand = new Hand();
-    private final GameMonitor gameMonitor;
+    private final Hand dealerHand;
+    private final Hand playerHand;
+    private GameMonitor gameMonitor;
     private boolean playerDone;
 
     public Game(Deck deck) {
-        this.deck = deck;
-        this.gameMonitor = game -> {};
+        this(deck, new Hand(), new Hand(), false);
     }
 
     public Game(Deck deck, GameMonitor gameMonitor) {
+        this(deck, new Hand(), new Hand(), false);
         this.gameMonitor = gameMonitor;
-        this.deck = deck;
     }
+
+    public Game(Deck deck, Hand playerHand, Hand dealerHand, boolean isPlayerDone) {
+        this.deck = deck;
+        this.playerHand = playerHand;
+        this.dealerHand = dealerHand;
+        playerDone = isPlayerDone;
+        this.gameMonitor = game -> {};
+    }
+
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule of Blackjack
