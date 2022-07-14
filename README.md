@@ -8,6 +8,7 @@ Also known as "Refactoring to Hexagonal Architecture".
 You **must have** the following already set up and running on your machine:
 
 * Java 17 or later
+  * We recommend using [SDKMAN](https://sdkman.io/) to manage your Java installations
 * A development environment such as IntelliJ IDEA or Eclipse
 * [Docker](https://docs.docker.com/get-docker/)
 
