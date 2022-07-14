@@ -3,7 +3,7 @@
   <component name="SharedFileColors">
     <fileColor scope="Outbound Adapters" color="Violet" />
     <fileColor scope="Inbound Adapters" color="Blue" />
-    <fileColor scope="Application" color="Rose" />
+    <fileColor scope="Application" color="Orange" />
     <fileColor scope="Domain" color="Yellow" />
   </component>
 </project>
