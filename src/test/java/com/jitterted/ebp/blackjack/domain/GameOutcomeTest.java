@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.StubDeck;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

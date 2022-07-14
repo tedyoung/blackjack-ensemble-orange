@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.StubDeck;
 import com.jitterted.ebp.blackjack.application.GameIdGenerator;
 import com.jitterted.ebp.blackjack.application.GameNotFound;
 import com.jitterted.ebp.blackjack.application.GameService;
@@ -8,6 +7,7 @@ import com.jitterted.ebp.blackjack.application.InMemoryGameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;

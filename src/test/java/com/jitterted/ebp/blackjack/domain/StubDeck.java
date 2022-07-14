@@ -1,9 +1,4 @@
-package com.jitterted.ebp.blackjack;
-
-import com.jitterted.ebp.blackjack.domain.Card;
-import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.Rank;
-import com.jitterted.ebp.blackjack.domain.Suit;
+package com.jitterted.ebp.blackjack.domain;
 
 import java.util.ArrayList;
 import java.util.List;

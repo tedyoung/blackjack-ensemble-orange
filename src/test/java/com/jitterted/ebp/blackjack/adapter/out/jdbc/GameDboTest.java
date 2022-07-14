@@ -1,9 +1,9 @@
 package com.jitterted.ebp.blackjack.adapter.out.jdbc;
 
-import com.jitterted.ebp.blackjack.StubDeck;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.Suit;
 import org.junit.jupiter.api.Test;
 

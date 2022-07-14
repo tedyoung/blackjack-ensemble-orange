@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.StubDeck;
 import com.jitterted.ebp.blackjack.domain.port.GameMonitor;
 import org.junit.jupiter.api.Test;
 
