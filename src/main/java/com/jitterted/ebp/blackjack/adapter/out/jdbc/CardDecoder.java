@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.util.Map.entry;
 
@@ -45,9 +46,8 @@ public class CardDecoder {
             return Collections.emptyList();
         }
 
-        List<Card> cards = Arrays.stream(encodedCards.split(","))
-                                 .map(CardDecoder::decode)
-                                 .toList();
-        return new ArrayList<>(cards);
+        return Arrays.stream(encodedCards.split(","))
+                     .map(CardDecoder::decode)
+                     .collect(Collectors.toCollection(ArrayList::new));
     }
 }
