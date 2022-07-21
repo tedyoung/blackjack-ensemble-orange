@@ -6,21 +6,25 @@ import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameOutcome;
 
+import java.util.function.Consumer;
+
 public class GameService {
     private final Deck deck;
     private final GameRepository gameRepository;
     private final GameMonitor gameMonitor;
 
-    public GameService(Deck deck, GameRepository gameRepository, GameMonitor gameMonitor) {
+    public GameService(Deck deck,
+                       GameRepository gameRepository,
+                       GameMonitor gameMonitor) {
         this.deck = deck;
         this.gameRepository = gameRepository;
         this.gameMonitor = gameMonitor;
     }
 
-    public Game startGame() {
+    // FACTORY method (not a command) - these can return objects
+    public Game createGame() {
         Game game = new Game(deck);
-        gameRepository.save(game);
-        return game;
+        return gameRepository.save(game);
     }
 
     public Game gameFor(long id) {
@@ -29,21 +33,32 @@ public class GameService {
     }
 
     public void initialDeal(long gameId) {
-        gameFor(gameId).initialDeal();
+        executeCommand(gameId, Game::initialDeal);
     }
 
     public void playerHits(long gameId) {
-        gameFor(gameId).playerHits();
+        executeCommand(gameId, Game::playerHits);
+    }
+
+    public void playerStands(long gameId) {
+        executeCommand(gameId, Game::playerStands);
+    }
+
+    private void executeCommand(long gameId, Consumer<Game> command) {
+        Game game = gameFor(gameId);
+        command.accept(game);
+        gameRepository.save(game);
+        notifyGameMonitorUponCompletion(game);
     }
 
     public boolean isPlayerDone(long gameId) {
         return gameFor(gameId).isPlayerDone();
     }
 
-    public void playerStands(long gameId) {
-        Game game = gameFor(gameId);
-        game.playerStands();
-        gameMonitor.roundCompleted(game);
+    private void notifyGameMonitorUponCompletion(Game game) {
+        if (isPlayerDone(game.getId())) {
+            gameMonitor.roundCompleted(game);
+        }
     }
 
     public GameOutcome gameOutcome(long gameId) {

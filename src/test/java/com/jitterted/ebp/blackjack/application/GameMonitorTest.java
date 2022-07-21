@@ -1,8 +1,10 @@
-package com.jitterted.ebp.blackjack.domain;
+package com.jitterted.ebp.blackjack.application;
 
-import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.FakeGameRepository;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
+import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -14,28 +16,26 @@ class GameMonitorTest {
 
     @Test
     public void playerStandsThenGameIsOverAndResultsSentToMonitor() throws Exception {
-        // create the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         Deck deck = StubDeck.playerNotDealtBlackjackAndStands();
-        GameService gameService = new GameService(deck, new FakeGameRepository(), game -> {
-        });
-        Game game = gameService.startGame();
-        Long gameId = game.getId();
+        GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
+        Long gameId = gameService.createGame().getId();
         gameService.initialDeal(gameId);
 
         gameService.playerStands(gameId);
 
-        // verify that the roundCompleted method was called with any instance of a Game class
         verify(gameMonitorSpy).roundCompleted(any(Game.class));
     }
 
     @Test
     public void playerHitsAndGoesBustThenResultsSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.playerHitsAndGoesBust(), gameMonitorSpy);
-        game.initialDeal();
+        StubDeck deck = StubDeck.playerHitsAndGoesBust();
+        GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
+        Long gameId = gameService.createGame().getId();
+        gameService.initialDeal(gameId);
 
-        game.playerHits();
+        gameService.playerHits(gameId);
 
         verify(gameMonitorSpy).roundCompleted(any(Game.class));
     }
@@ -43,10 +43,12 @@ class GameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenNoResultsSendToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), gameMonitorSpy);
-        game.initialDeal();
+        StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
+        GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
+        Long gameId = gameService.createGame().getId();
+        gameService.initialDeal(gameId);
 
-        game.playerHits();
+        gameService.playerHits(gameId);
 
         verify(gameMonitorSpy, never()).roundCompleted(any(Game.class));
     }
@@ -54,9 +56,11 @@ class GameMonitorTest {
     @Test
     public void playerDealtBlackjackThenResultsSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.playerDealtBlackjack(), gameMonitorSpy);
+        StubDeck deck = StubDeck.playerDealtBlackjack();
+        GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
+        Long gameId = gameService.createGame().getId();
 
-        game.initialDeal();
+        gameService.initialDeal(gameId);
 
         verify(gameMonitorSpy).roundCompleted(any(Game.class));
     }

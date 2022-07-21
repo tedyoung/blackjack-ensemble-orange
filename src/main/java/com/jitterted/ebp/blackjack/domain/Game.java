@@ -1,7 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.application.port.GameMonitor;
-
 public class Game {
 
     private Long id;
@@ -9,26 +7,20 @@ public class Game {
 
     private final Hand dealerHand;
     private final Hand playerHand;
-    private GameMonitor gameMonitor;
     private boolean playerDone;
 
+    // called by GameService to start a new game
     public Game(Deck deck) {
         this(deck, new Hand(), new Hand(), false);
     }
 
-    public Game(Deck deck, GameMonitor gameMonitor) {
-        this(deck, new Hand(), new Hand(), false);
-        this.gameMonitor = gameMonitor;
-    }
-
+    // used by Repository to reconstitute object from database
     public Game(Deck deck, Hand playerHand, Hand dealerHand, boolean isPlayerDone) {
         this.deck = deck;
         this.playerHand = playerHand;
         this.dealerHand = dealerHand;
         playerDone = isPlayerDone;
-        this.gameMonitor = game -> {};
     }
-
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule of Blackjack
@@ -102,25 +94,12 @@ public class Game {
     private void updatePlayerDoneTo(boolean playerIsDone) {
         if (playerIsDone) {
             playerDone = true;
-            gameMonitor.roundCompleted(this);
         }
     }
-
-    /*
-    gameService.currentPlayerStands() {
-        // repo.findGame()
-       game.playerStands();
-       if (game.isPlayerDone()) {
-         monitor....
-       }
-       repo.save(game)
-     }
-     */
 
     public boolean isPlayerDone() {
         return playerDone;
     }
-
 
     public Long getId() {
         return id;

@@ -21,7 +21,7 @@ public class BlackjackController {
 
     @PostMapping("/start-game")
     public String startGame() {
-        Game game = gameService.startGame();
+        Game game = gameService.createGame();
         gameService.initialDeal(game.getId());
         return redirectToGamePage(game.getId());
     }
