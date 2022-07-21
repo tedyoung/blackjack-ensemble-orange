@@ -12,6 +12,8 @@ public class HexagonalArchUnitTest {
         JavaClasses importedClasses = new ClassFileImporter()
                 .withImportOption(location -> !location.contains("Blackjack.class"))
                 .withImportOption(location -> !location.contains("BlackjackGameApplication.class"))
+                .withImportOption(location -> !location.contains("BlackjackGameConfiguration.class"))
+                .withImportOption(location -> !location.contains("IntegrationTestConfiguration.class"))
                 .importPackages("com.jitterted.ebp.blackjack");
 
         Architectures.onionArchitecture()

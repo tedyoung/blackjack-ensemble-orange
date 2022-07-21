@@ -1,9 +1,9 @@
 package com.jitterted.ebp.blackjack.adapter.out.jdbc;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.*;
@@ -13,7 +13,8 @@ import static org.assertj.core.api.Assertions.*;
         "spring.test.database.replace=NONE",
         "spring.datasource.url=jdbc:tc:postgresql:14:///springboot"
 })
-public class GameRepositoryAdapterTest {
+@Tag("integration")
+public class GameDboRepositoryTest {
 
     @Autowired
     GameJdbcRepository gameJdbcRepository;

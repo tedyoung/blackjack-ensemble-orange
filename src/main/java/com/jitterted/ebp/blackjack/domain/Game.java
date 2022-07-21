@@ -1,6 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.domain.port.GameMonitor;
+import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 
 public class Game {
 

@@ -1,8 +1,5 @@
 package com.jitterted.ebp.blackjack;
 
-import com.jitterted.ebp.blackjack.application.GameIdGenerator;
-import com.jitterted.ebp.blackjack.application.GameService;
-import com.jitterted.ebp.blackjack.application.InMemoryGameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import org.springframework.boot.SpringApplication;
@@ -22,10 +19,5 @@ public class BlackjackGameApplication {
         return new Game(new Deck());
     }
 
-    @Bean
-    public GameService createGameService() {
-        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
-        return new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator));
-    }
 
 }

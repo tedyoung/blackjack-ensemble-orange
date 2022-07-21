@@ -1,3 +1,24 @@
+Retrospective: Ensemble Orange #14 (July 14, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Lots of shortcuts in chat today
+    Got more clear on Repository Adapter
+        Was quick and straightforward as all the work was done in the Dbo itself
+    Separated out @Bean configuration into its own configuration class for test to override in @TestConfiguration
+    Single method interface (SAM) can be implemented as an “empty” lambda (or a lambda that does things)
+    Nice to see HexArch ArchUnit tests
+    In Hexagon, adapters are separate (vs. Onion/Clean)
+    Like the color coding of files (Thanks!)
+    Instead of Parallel change to the GameService constructor, introduced the constant (lambda) and then used Expose Hidden Details Maneuver
+    Adapter returns different instance of object
+    Doesn't feel good that the application was broken, despite all tests green
+        GameService never saved the modified Game object back to the repository
+Learnings
+    Alt+F12 or Cmd+F12 to open/close Terminal
+    Postfix .return
+    Shift+Enter during class search to open on the right pane
+
+
 Retrospective: Ensemble FRI-PM #13 (July 1, 2022)
 -------------------------------------------------
 Thoughts, Observations

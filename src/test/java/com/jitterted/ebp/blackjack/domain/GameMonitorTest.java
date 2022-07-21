@@ -1,6 +1,8 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.domain.port.GameMonitor;
+import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.application.port.FakeGameRepository;
+import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -15,10 +17,13 @@ class GameMonitorTest {
         // create the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         Deck deck = StubDeck.playerNotDealtBlackjackAndStands();
-        Game game = new Game(deck, gameMonitorSpy);
-        game.initialDeal();
+        GameService gameService = new GameService(deck, new FakeGameRepository(), game -> {
+        });
+        Game game = gameService.startGame();
+        Long gameId = game.getId();
+        gameService.initialDeal(gameId);
 
-        game.playerStands();
+        gameService.playerStands(gameId);
 
         // verify that the roundCompleted method was called with any instance of a Game class
         verify(gameMonitorSpy).roundCompleted(any(Game.class));
