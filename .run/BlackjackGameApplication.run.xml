@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="BlackjackGameApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <option name="ACTIVE_PROFILES" />
-    <module name="blackjack-ensemble-fri-pm" />
+    <module name="blackjack" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.jitterted.ebp.blackjack.BlackjackGameApplication" />
     <extension name="coverage">
       <pattern>
