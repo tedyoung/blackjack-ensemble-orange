@@ -1,3 +1,20 @@
+Retrospective: Ensemble Orange #16 (July 28, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Felt burned out
+    Liked that we took time to clarify tests that make sense and match their names +1
+        Makes the tests harder to understand when they don’t match
+        Looking at tests again lets you see if you understand it
+        What are we testing and what do we Want to test?
+    Took a step back to see where we were going
+Learnings
+    Deep copy vs. shallow copy
+        and memento pattern
+    Entities defined by ID (and not its properties)—good reminder
+    AssertJ: isNotSameAs vs. isNotEqual
+        instance vs. equals() method
+
+
 Retrospective: Ensemble Orange #15 (July 21, 2022)
 --------------------------------------------------
 Thoughts, Observations

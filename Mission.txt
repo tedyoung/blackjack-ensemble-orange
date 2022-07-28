@@ -29,6 +29,7 @@ NEXT:
         [X] 5. Implement the translation to/from JDBC for the GameRepository interface
 -->     [ ] 6. Call GameRepository#save() after every command in GameService
             [ ] Make the InMemory version more like the real thing by always returning/storing different instances of Game
+            **** DEEP COPY: do we want memento pattern?
 
 
 Database:

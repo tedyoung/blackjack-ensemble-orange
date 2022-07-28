@@ -12,19 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 class InMemoryGameRepositoryTest {
 
     @Test
-    void savingGameAlreadyHasIdCanBeFoundById() {
-        GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
-        Game game = new Game(new Deck());
-        game.setId(12L);
-
-        gameRepository.save(game);
-
-        assertThat(gameRepository.findById(12L))
-                .contains(game);
-    }
-
-    @Test
-    void saveGameReturnsSameGame() {
+    void saveGameReturnsDifferentInstanceOfSameGame() {
         GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
         Game game = new Game(new Deck());
         game.setId(12L);
@@ -33,8 +21,10 @@ class InMemoryGameRepositoryTest {
 
         assertThat(savedGame)
                 .isEqualTo(game);
+        assertThat(savedGame)
+                .isNotSameAs(game);
     }
-    
+
     @Test
     void findingNotSavedGameByIdReturnsEmptyOptional() {
         GameRepository emptyGameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
@@ -49,9 +39,52 @@ class InMemoryGameRepositoryTest {
         GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(12L));
         Game game = new Game(new Deck());
 
+        Game savedGame = gameRepository.save(game);
+
+        assertThat(savedGame.getId())
+                .isNotNull();
+    }
+
+    @Test
+    void savingExistingGameThatHasIdIsNotAssignedNewId() {
+        GameRepository gameRepository = new InMemoryGameRepository(new GameIdGenerator(0L));
+        Game game = new Game(new Deck());
+        game.setId(12L);
+
+        Game savedGame = gameRepository.save(game);
+
+        assertThat(savedGame.getId())
+                .isEqualTo(12L);
+    }
+
+    @Test
+    void findingByIdExistingGameDifferentInstanceOfSameGame() {
+        GameRepository gameRepository = new InMemoryGameRepository(
+                new GameIdGenerator(0L));
+        Game game = new Game(new Deck());
+        game.setId(12L);
         gameRepository.save(game);
 
-        assertThat(gameRepository.findById(12L))
-                .contains(game);
+        Game foundGame = gameRepository.findById(12L).get();
+
+        assertThat(foundGame)
+                .isEqualTo(game);
+        assertThat(foundGame)
+                .isNotSameAs(game);
+    }
+
+    @Test
+    void savingGameReturnsADeepCopyOfGame() {
+        GameRepository gameRepository = new InMemoryGameRepository(
+                new GameIdGenerator(0L));
+        Game game = new Game(new Deck());
+        game.initialDeal();
+
+        Game savedGame = gameRepository.save(game);
+
+        assertThat(savedGame.playerHand())
+                .isEqualTo(game.playerHand());
+        assertThat(savedGame.playerHand())
+                .isNotSameAs(game.playerHand());
     }
 }

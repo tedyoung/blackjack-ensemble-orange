@@ -21,12 +21,27 @@ public class InMemoryGameRepository implements GameRepository {
             game.setId(gameIdGenerator.nextId());
         }
         gameMap.put(game.getId(), game);
-        return game;
+        return copyOf(game);
     }
 
     @Override
     public Optional<Game> findById(long id) {
-        return Optional.ofNullable(gameMap.get(id));
+        Game game = gameMap.get(id);
+        return Optional.ofNullable(copyOf(game));
+    }
+
+    private static Game copyOf(Game game) {
+        if (game == null) {
+            return null;
+        }
+
+        return new Game(
+                game.getId(),
+                game.deck(),
+                game.playerHand(),
+                game.dealerHand(),
+                game.isPlayerDone()
+        );
     }
 
 }

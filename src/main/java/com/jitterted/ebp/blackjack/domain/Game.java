@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.Objects;
+
 public class Game {
 
     private Long id;
@@ -11,11 +13,12 @@ public class Game {
 
     // called by GameService to start a new game
     public Game(Deck deck) {
-        this(deck, new Hand(), new Hand(), false);
+        this(null, deck, new Hand(), new Hand(), false);
     }
 
     // used by Repository to reconstitute object from database
-    public Game(Deck deck, Hand playerHand, Hand dealerHand, boolean isPlayerDone) {
+    public Game(Long id, Deck deck, Hand playerHand, Hand dealerHand, boolean isPlayerDone) {
+        this.id = id;
         this.deck = deck;
         this.playerHand = playerHand;
         this.dealerHand = dealerHand;
@@ -109,4 +112,27 @@ public class Game {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Game game = (Game) o;
+
+        return Objects.equals(id, game.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" + "id=" + id + '}';
+    }
 }
