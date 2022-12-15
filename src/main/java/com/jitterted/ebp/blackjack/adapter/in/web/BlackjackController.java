@@ -26,6 +26,11 @@ public class BlackjackController {
         return redirectToGamePage(game.getId());
     }
 
+    @PostMapping("/start-game")
+    public String startGame(String amount) {
+        return startGame();
+    }
+
     @GetMapping("/game/{gameId}")
     public String gameView(Model model, @PathVariable Long gameId) {
         if (gameService.isPlayerDone(gameId)) {

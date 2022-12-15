@@ -201,7 +201,7 @@ class BlackjackControllerTest {
 
     @Test
     public void gameViewForGameInProgressReturnsGameInProgressTemplate() {
-        final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
+        GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
@@ -214,4 +214,17 @@ class BlackjackControllerTest {
                 .isEqualTo("game-in-progress");
     }
 
+    @Test
+    void gameStartsWithBetAmount() {
+        GameIdGenerator gameIdGenerator = new GameIdGenerator(5);
+        GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new InMemoryGameRepository(gameIdGenerator), game -> {
+        });
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame("1");
+
+        Game game = gameService.gameFor(5);
+
+        assertThat(game.betAmount())
+                .isEqualTo(1);
+    }
 }

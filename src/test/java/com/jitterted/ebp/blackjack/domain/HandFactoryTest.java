@@ -22,7 +22,7 @@ class HandFactoryTest {
         Hand hand = HandFactory.createHand(List.of(new Card(Rank.TEN, Suit.HEARTS)));
 
         assertThat(hand.cards())
-            .hasSize(1);
+                .containsExactly(new Card(Rank.TEN, Suit.HEARTS));
     }
 
 }

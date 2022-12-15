@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.adapter.out.jdbc;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Hand;
+import com.jitterted.ebp.blackjack.domain.HandFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -28,8 +29,8 @@ public class GameDbo {
 
     public Game toDomain() {
         Deck decodedDeck = new Deck(CardDecoder.decodeCards(deck));
-        Hand decodedPlayerHand = new Hand(0, CardDecoder.decodeCards(playerHand));
-        Hand decodedDealerHand = new Hand(1, CardDecoder.decodeCards(dealerHand));
+        Hand decodedPlayerHand = HandFactory.createHand(CardDecoder.decodeCards(playerHand));
+        Hand decodedDealerHand = HandFactory.createHand(CardDecoder.decodeCards(dealerHand));
         return new Game(id, decodedDeck, decodedPlayerHand, decodedDealerHand, isPlayerDone);
     }
 

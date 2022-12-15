@@ -137,4 +137,8 @@ public class Game {
     public String toString() {
         return "Game{" + "id=" + id + '}';
     }
+
+    public int betAmount() {
+        return 0;
+    }
 }
