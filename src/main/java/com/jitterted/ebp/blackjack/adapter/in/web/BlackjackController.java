@@ -21,7 +21,13 @@ public class BlackjackController {
 
     @PostMapping("/start-game")
     public String startGame(String amount) {
-        int betAmount = Integer.parseInt(amount);
+        int betAmount;
+        if (amount.isBlank()) {
+            betAmount = 0;
+        } else {
+            betAmount = Integer.parseInt(amount);
+        }
+
         Game game = gameService.createGame(betAmount);
         gameService.initialDeal(game.getId());
         return redirectToGamePage(game.getId());

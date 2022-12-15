@@ -29,6 +29,7 @@ public class GameService {
 
     public Game createGame(int betAmount) {
         Game game = new Game(deck);
+        game.bet(betAmount);
         return gameRepository.save(game);
     }
 

@@ -12,6 +12,7 @@ public class Game {
     private final Hand dealerHand;
     private final Hand playerHand;
     private boolean playerDone;
+    private int betAmount;
 
     // called by GameService to start a new game
     public Game(Deck deck) {
@@ -139,6 +140,10 @@ public class Game {
     }
 
     public int betAmount() {
-        return 1;
+        return betAmount;
+    }
+
+    public void bet(int betAmount) {
+        this.betAmount = betAmount;
     }
 }
