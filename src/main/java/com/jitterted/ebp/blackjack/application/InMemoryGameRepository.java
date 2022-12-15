@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Hand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +39,8 @@ public class InMemoryGameRepository implements GameRepository {
         return new Game(
                 game.getId(),
                 game.deck(),
-                game.playerHand(),
-                game.dealerHand(),
+                new Hand(game.playerHand().getId(), game.playerHand().cards()),
+                new Hand(game.dealerHand().getId(), game.dealerHand().cards()),
                 game.isPlayerDone()
         );
     }

@@ -28,8 +28,8 @@ public class GameDbo {
 
     public Game toDomain() {
         Deck decodedDeck = new Deck(CardDecoder.decodeCards(deck));
-        Hand decodedPlayerHand = new Hand(CardDecoder.decodeCards(playerHand));
-        Hand decodedDealerHand = new Hand(CardDecoder.decodeCards(dealerHand));
+        Hand decodedPlayerHand = new Hand(0, CardDecoder.decodeCards(playerHand));
+        Hand decodedDealerHand = new Hand(1, CardDecoder.decodeCards(dealerHand));
         return new Game(id, decodedDeck, decodedPlayerHand, decodedDealerHand, isPlayerDone);
     }
 

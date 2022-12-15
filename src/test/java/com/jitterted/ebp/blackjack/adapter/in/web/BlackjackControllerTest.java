@@ -59,10 +59,10 @@ class BlackjackControllerTest {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame();
-        Game game = gameService.gameFor(10L);
 
         blackjackController.hitCommand(10L);
 
+        Game game = gameService.gameFor(10L);
         assertThat(game.playerHand().cards())
                 .hasSize(3);
         assertThat(game.isPlayerDone())

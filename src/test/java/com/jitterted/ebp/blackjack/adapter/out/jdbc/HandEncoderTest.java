@@ -14,7 +14,7 @@ public class HandEncoderTest {
 
     @Test
     void emptyHandEncodedAsEmptyString() {
-        Hand hand = new Hand();
+        Hand hand = new Hand(1);
 
         String encodedHand = Encoder.encode(hand);
 
@@ -24,7 +24,7 @@ public class HandEncoderTest {
 
     @Test
     void handWithOneCardIsEncodedAsSingleCardString() {
-        Hand hand = new Hand(List.of(new Card(Rank.JACK, Suit.HEARTS)));
+        Hand hand = new Hand(1, List.of(new Card(Rank.JACK, Suit.HEARTS)));
 
         String encodedHand = Encoder.encode(hand);
 

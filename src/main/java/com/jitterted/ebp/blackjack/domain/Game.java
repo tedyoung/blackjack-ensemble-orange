@@ -2,6 +2,8 @@ package com.jitterted.ebp.blackjack.domain;
 
 import java.util.Objects;
 
+// Aggregate Root
+// Entity
 public class Game {
 
     private Long id;
@@ -13,7 +15,7 @@ public class Game {
 
     // called by GameService to start a new game
     public Game(Deck deck) {
-        this(null, deck, new Hand(), new Hand(), false);
+        this(null, deck, new Hand(0), new Hand(1), false);
     }
 
     // used by Repository to reconstitute object from database

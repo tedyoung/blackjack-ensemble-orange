@@ -40,7 +40,7 @@ public class HandValueAceTest {
         for (Rank rank : ranks) {
             cards.add(new Card(rank, DUMMY_SUIT));
         }
-        return new Hand(cards);
+        return new Hand(0, cards);
     }
 
 }

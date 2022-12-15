@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -86,5 +87,14 @@ class InMemoryGameRepositoryTest {
                 .isEqualTo(game.playerHand());
         assertThat(savedGame.playerHand())
                 .isNotSameAs(game.playerHand());
+        assertThat(savedGame.dealerHand())
+                .isEqualTo(game.dealerHand());
+        assertThat(savedGame.dealerHand())
+                .isNotSameAs(game.dealerHand());
+        assertThat(savedGame.playerHand().cards())
+                .isEqualTo(game.playerHand().cards());
+        assertThat(savedGame.dealerHand().cards())
+                .isEqualTo(game.dealerHand().cards());
+        // additional assertions to ensure Decks are different instances
     }
 }

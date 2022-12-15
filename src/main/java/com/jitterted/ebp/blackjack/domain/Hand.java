@@ -3,14 +3,23 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+// Entity
 public class Hand {
-    private final List<Card> cards = new ArrayList<>();
 
-    public Hand(List<Card> cards) {
-        this.cards.addAll(cards);
+    private final List<Card> cards = new ArrayList<>();
+    private final int id;
+
+    public int getId() {
+        return id;
     }
 
-    public Hand() {
+    public Hand(int id) {
+        this.id = id;
+    }
+
+    public Hand(int id, List<Card> cards) {
+        this.id = id;
+        this.cards.addAll(cards);
     }
 
     public int value() {
@@ -64,5 +73,20 @@ public class Hand {
 
     public boolean hasBlackjack() {
         return value() == 21 && cards.size() == 2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Hand hand = (Hand) o;
+
+        return id == hand.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
