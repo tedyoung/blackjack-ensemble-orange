@@ -139,6 +139,6 @@ public class Game {
     }
 
     public int betAmount() {
-        return 0;
+        return 1;
     }
 }

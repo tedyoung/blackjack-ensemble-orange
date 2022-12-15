@@ -24,7 +24,7 @@ class BlackjackControllerTest {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        final String redirectPage = blackjackController.startGame();
+        final String redirectPage = blackjackController.startGame("");
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game/41");
@@ -39,7 +39,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         Model model = new ConcurrentModel();
         blackjackController.gameView(model, 13L);
@@ -58,7 +58,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         blackjackController.hitCommand(10L);
 
@@ -76,7 +76,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         String redirectPage = blackjackController.hitCommand(18L);
 
@@ -94,7 +94,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         blackjackController.hitCommand(15L);
 
@@ -114,8 +114,8 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(twoGameDeckForSecondGameHit, new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
-        blackjackController.startGame(); // 16
+        blackjackController.startGame("");
+        blackjackController.startGame(""); // 16
 
         blackjackController.hitCommand(15L);
 
@@ -130,7 +130,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         String redirectPage = blackjackController.standCommand(73L);
 
@@ -159,7 +159,7 @@ class BlackjackControllerTest {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         Game game = gameService.gameFor(0L);
         assertThat(game)
@@ -173,7 +173,7 @@ class BlackjackControllerTest {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         Game game = gameService.gameFor(0L);
         assertThat(game.getId())
@@ -186,7 +186,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(StubDeck.playerDealtBlackjack(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         ConcurrentModel model = new ConcurrentModel();
         String page = blackjackController.gameView(model, 0L);
@@ -205,7 +205,7 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame("");
 
         ConcurrentModel model = new ConcurrentModel();
         String page = blackjackController.gameView(model, 0L);
@@ -220,11 +220,12 @@ class BlackjackControllerTest {
         GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame("1");
+        blackjackController.startGame("2");
 
         Game game = gameService.gameFor(5);
 
         assertThat(game.betAmount())
-                .isEqualTo(1);
+                .isEqualTo(2);
     }
+
 }
