@@ -15,7 +15,7 @@ public class Game {
 
     // called by GameService to start a new game
     public Game(Deck deck) {
-        this(null, deck, new Hand(0), new Hand(1), false);
+        this(null, deck, HandFactory.createHand(), HandFactory.createHand(), false);
     }
 
     // used by Repository to reconstitute object from database
