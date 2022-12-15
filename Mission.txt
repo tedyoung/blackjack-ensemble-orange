@@ -17,6 +17,7 @@ NEXT:
                     [X] Encode the Deck into a String property
                     [ ] (optional) Convert Encoder methods to non-static
                     [X] Decode GameDbo --> Game domain object
+==>                 [ ] Encode/Decode Hand's ID -- "owned" by a HandFactory
                [ ] Consider converting to memento pattern
         [X] 3. Tests for mapping to/from Domain Object <-> DBO
         [X] Game: get rid of GameMonitor from Game (move into GameService)
