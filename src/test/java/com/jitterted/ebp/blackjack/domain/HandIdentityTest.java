@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class HandIdentityTest {
 
     @Test
-    void givenTwoHandsWithSameCardsSecondHandIsNotEqual() {
+    void givenTwoHandsWithSameCardsSecondHandIsNotEqualForDifferentId() {
         Hand handOne = new Hand(1, List.of(new Card(Rank.TWO, Suit.HEARTS), new Card(Rank.ACE, Suit.CLUBS)));
         Hand handTwo = new Hand(2, List.of(new Card(Rank.TWO, Suit.HEARTS), new Card(Rank.ACE, Suit.CLUBS)));
 
@@ -18,7 +18,7 @@ class HandIdentityTest {
     }
 
     @Test
-    void givenTwoHandsWithSameIdEqual() {
+    void givenTwoHandsWithSameIdEqualRegardlessOfCards() {
         Hand handOne = new Hand(1, List.of(new Card(Rank.TWO, Suit.HEARTS), new Card(Rank.ACE, Suit.CLUBS)));
         Hand handTwo = new Hand(1, List.of());
 

@@ -20,11 +20,19 @@ public class BlackjackController {
     }
 
     @PostMapping("/start-game")
-    public String startGame() {
-        Game game = gameService.createGame();
+    public String startGame(String amount) {
+        int betAmount;
+        if (amount.isBlank()) {
+            betAmount = 0;
+        } else {
+            betAmount = Integer.parseInt(amount);
+        }
+
+        Game game = gameService.createGame(betAmount);
         gameService.initialDeal(game.getId());
         return redirectToGamePage(game.getId());
     }
+
 
     @GetMapping("/game/{gameId}")
     public String gameView(Model model, @PathVariable Long gameId) {

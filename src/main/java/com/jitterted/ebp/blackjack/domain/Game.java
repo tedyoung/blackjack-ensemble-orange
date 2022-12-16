@@ -12,10 +12,11 @@ public class Game {
     private final Hand dealerHand;
     private final Hand playerHand;
     private boolean playerDone;
+    private int betAmount;
 
     // called by GameService to start a new game
     public Game(Deck deck) {
-        this(null, deck, new Hand(0), new Hand(1), false);
+        this(null, deck, HandFactory.createHand(), HandFactory.createHand(), false);
     }
 
     // used by Repository to reconstitute object from database
@@ -136,5 +137,13 @@ public class Game {
     @Override
     public String toString() {
         return "Game{" + "id=" + id + '}';
+    }
+
+    public int betAmount() {
+        return betAmount;
+    }
+
+    public void bet(int betAmount) {
+        this.betAmount = betAmount;
     }
 }

@@ -1,6 +1,7 @@
 # Mission/Goals
 
 ## Current Feature
+- Add Betting support
 
 NEXT:
 =====
@@ -17,6 +18,7 @@ NEXT:
                     [X] Encode the Deck into a String property
                     [ ] (optional) Convert Encoder methods to non-static
                     [X] Decode GameDbo --> Game domain object
+==>                 [ ] Encode/Decode Hand's ID -- "owned" by a HandFactory
                [ ] Consider converting to memento pattern
         [X] 3. Tests for mapping to/from Domain Object <-> DBO
         [X] Game: get rid of GameMonitor from Game (move into GameService)
@@ -27,10 +29,9 @@ NEXT:
             [X] Test for finding by ID
             [X] Test that all properties were stored
         [X] 5. Implement the translation to/from JDBC for the GameRepository interface
--->     [ ] 6. Call GameRepository#save() after every command in GameService
+-->     [X] 6. Call GameRepository#save() after every command in GameService
             [ ] Make the InMemory version more like the real thing by always returning/storing different instances of Game
             **** DEEP COPY: do we want memento pattern?
-
 
 Database:
 Games:
@@ -57,7 +58,6 @@ FUTURE:
 
 ## Other Feature Options
 
-2. Add Betting support
 3. Support multiple players (one dealer, multiple players)
 
 ## Done

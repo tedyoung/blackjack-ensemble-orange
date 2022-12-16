@@ -27,6 +27,12 @@ public class GameService {
         return gameRepository.save(game);
     }
 
+    public Game createGame(int betAmount) {
+        Game game = new Game(deck);
+        game.bet(betAmount);
+        return gameRepository.save(game);
+    }
+
     public Game gameFor(long id) {
         return gameRepository.findById(id)
                              .orElseThrow(GameNotFound::new);
@@ -64,4 +70,6 @@ public class GameService {
     public GameOutcome gameOutcome(long gameId) {
         return gameFor(gameId).determineOutcome();
     }
+
+
 }
