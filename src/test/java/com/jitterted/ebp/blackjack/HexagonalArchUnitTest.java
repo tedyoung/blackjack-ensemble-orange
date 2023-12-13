@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("integration")
-public class HexagonalArchUnitTest {
+class HexagonalArchUnitTest {
 
     @Test
-    public void hexagonalArchitecture() throws Exception {
+    void hexagonalArchitecture() throws Exception {
         JavaClasses importedClasses = new ClassFileImporter()
                 .withImportOption(location -> !location.contains("Blackjack.class"))
                 .withImportOption(location -> !location.contains("BlackjackGameApplication.class"))

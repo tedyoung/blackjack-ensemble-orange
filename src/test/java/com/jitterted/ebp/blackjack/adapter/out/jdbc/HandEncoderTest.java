@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class HandEncoderTest {
+class HandEncoderTest {
 
     @Test
     void emptyHandEncodedAsEmptyString() {

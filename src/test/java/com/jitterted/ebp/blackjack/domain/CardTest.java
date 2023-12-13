@@ -9,7 +9,7 @@ class CardTest {
     private static final Suit DUMMY_SUIT = Suit.HEARTS;
 
     @Test
-    public void withNumberCardHasNumericValueOfTheNumber() throws Exception {
+    void withNumberCardHasNumericValueOfTheNumber() throws Exception {
         Card card = new Card(Rank.SEVEN, DUMMY_SUIT);
 
         assertThat(card.rankValue())
@@ -17,7 +17,7 @@ class CardTest {
     }
 
     @Test
-    public void withValueOfQueenHasNumericValueOf10() throws Exception {
+    void withValueOfQueenHasNumericValueOf10() throws Exception {
         Card card = new Card(Rank.QUEEN, DUMMY_SUIT);
 
         assertThat(card.rankValue())
@@ -25,7 +25,7 @@ class CardTest {
     }
 
     @Test
-    public void withAceHasNumericValueOf1() throws Exception {
+    void withAceHasNumericValueOf1() throws Exception {
         Card card = new Card(Rank.ACE, DUMMY_SUIT);
 
         assertThat(card.rankValue())

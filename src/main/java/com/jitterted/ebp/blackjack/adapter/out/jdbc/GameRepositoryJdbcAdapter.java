@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.adapter.out.jdbc;
 
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Game;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,7 +11,6 @@ public class GameRepositoryJdbcAdapter implements GameRepository {
 
     private final GameJdbcRepository gameJdbcRepository;
 
-    @Autowired
     public GameRepositoryJdbcAdapter(GameJdbcRepository gameJdbcRepository) {
         this.gameJdbcRepository = gameJdbcRepository;
     }

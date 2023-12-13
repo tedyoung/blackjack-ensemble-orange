@@ -16,31 +16,31 @@ import org.testcontainers.junit.jupiter.Testcontainers;
         "spring.datasource.url=jdbc:tc:postgresql:14:///springboot"
 })
 @Import(GameRepositoryJdbcAdapter.class)
-public class JdbcRepositoryGameServiceTest {
+class JdbcRepositoryGameServiceTest {
 
     @Autowired
     GameRepository gameRepository;
 
     @Test
-    public void startGameForTheGivenDeck() throws Exception {
+    void startGameForTheGivenDeck() throws Exception {
         new GameServiceTest()
                 .startGameForTheGivenDeck(gameRepository);
     }
 
     @Test
-    public void playerStandsThenGameIsOverAndResultsSentToMonitor() throws Exception {
+    void playerStandsThenGameIsOverAndResultsSentToMonitor() throws Exception {
         new GameServiceTest()
                 .playerStandsThenGameIsSaved(gameRepository);
     }
 
     @Test
-    public void afterInitialDealThenDealtCardsAreSaved() throws Exception {
+    void afterInitialDealThenDealtCardsAreSaved() throws Exception {
         new GameServiceTest()
                 .afterInitialDealThenDealtCardsAreSaved(gameRepository);
     }
 
     @Test
-    public void playerHitsThenGameIsSaved() throws Exception {
+    void playerHitsThenGameIsSaved() throws Exception {
         new GameServiceTest()
                 .playerHitsThenGameIsSaved(gameRepository);
     }

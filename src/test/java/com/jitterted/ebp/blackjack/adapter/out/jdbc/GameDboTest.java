@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GameDboTest {
+class GameDboTest {
 
     @Test
     void givenGameTransformedToGameDbo() {
@@ -59,7 +59,7 @@ public class GameDboTest {
     }
 
     @Test
-    public void givenEncodedGameAfterInitialDealDecodesGame() {
+    void givenEncodedGameAfterInitialDealDecodesGame() {
         GameDbo gameDbo = new GameDbo();
         gameDbo.setPlayerHand("AS,TC");
         gameDbo.setDealerHand("5H,TS");

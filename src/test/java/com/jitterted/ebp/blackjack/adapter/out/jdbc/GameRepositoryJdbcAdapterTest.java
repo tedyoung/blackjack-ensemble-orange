@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.*;
         "spring.test.database.replace=NONE",
         "spring.datasource.url=jdbc:tc:postgresql:14:///springboot"
 })
-public class GameRepositoryJdbcAdapterTest {
+class GameRepositoryJdbcAdapterTest {
 
     @Autowired GameJdbcRepository gameJdbcRepository;
 
@@ -36,7 +36,7 @@ public class GameRepositoryJdbcAdapterTest {
     }
 
     @Test
-    public void savedGameIsFoundById() throws Exception {
+    void savedGameIsFoundById() throws Exception {
         GameRepositoryJdbcAdapter adapter = new GameRepositoryJdbcAdapter(gameJdbcRepository);
         Game game = new Game(new Deck());
         Game savedGame = adapter.save(game);

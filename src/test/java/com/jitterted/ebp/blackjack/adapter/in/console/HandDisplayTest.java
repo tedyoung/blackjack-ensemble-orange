@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 class HandDisplayTest {
 
     @Test
-    public void displayFirstCard() throws Exception {
+    void displayFirstCard() throws Exception {
         Hand hand = new Hand(42, List.of(new Card(Rank.ACE, Suit.HEARTS)));
 
         assertThat(ConsoleHand.displayFirstCard(hand))
@@ -21,7 +21,7 @@ class HandDisplayTest {
     }
 
     @Test
-    public void cardsAsStringTransformsWholeHandToDisplayString() throws Exception {
+    void cardsAsStringTransformsWholeHandToDisplayString() throws Exception {
         Hand hand = new Hand(42, List.of(new Card(Rank.NINE, Suit.HEARTS),
                                                          new Card(Rank.THREE, Suit.SPADES)));
 

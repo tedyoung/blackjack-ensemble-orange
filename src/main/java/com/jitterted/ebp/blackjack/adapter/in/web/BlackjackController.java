@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Game;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ public class BlackjackController {
 
     private final GameService gameService;
 
-    @Autowired
     public BlackjackController(GameService gameService) {
         this.gameService = gameService;
     }

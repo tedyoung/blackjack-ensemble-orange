@@ -11,9 +11,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class DeckEncoderTest {
+class DeckEncoderTest {
     @Test
-    public void emptyDeckEncodedAsEmptyString() throws Exception {
+    void emptyDeckEncodedAsEmptyString() throws Exception {
         Deck deck = new StubDeck();
 
         String encodedDeck = Encoder.encode(deck);
@@ -23,7 +23,7 @@ public class DeckEncoderTest {
     }
 
     @Test
-    public void deckWithOneCardEncodedAsCardString() throws Exception {
+    void deckWithOneCardEncodedAsCardString() throws Exception {
         Deck deck = new StubDeck(List.of(new Card(Rank.TEN, Suit.HEARTS)));
 
         String encodedDeck = Encoder.encode(deck);
@@ -33,7 +33,7 @@ public class DeckEncoderTest {
     }
 
     @Test
-    public void deckWithTwoCardsEncodedAsCommaSeparatedTwoCardString() throws Exception {
+    void deckWithTwoCardsEncodedAsCommaSeparatedTwoCardString() throws Exception {
         Deck deck = new StubDeck(List.of(new Card(Rank.TEN, Suit.HEARTS),
                                          new Card(Rank.ACE, Suit.HEARTS)));
 

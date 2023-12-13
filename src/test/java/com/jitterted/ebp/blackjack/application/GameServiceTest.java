@@ -37,7 +37,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void startGameCreatesNewGameEveryTime() throws Exception {
+    void startGameCreatesNewGameEveryTime() throws Exception {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(new Deck(),
                                                   new InMemoryGameRepository(gameIdGenerator), game -> {
@@ -51,7 +51,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void getGameByIdReturnsTheCorrectGame() throws Exception {
+    void getGameByIdReturnsTheCorrectGame() throws Exception {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(new Deck(),
                                                   new InMemoryGameRepository(gameIdGenerator), game -> {
@@ -65,7 +65,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void getGameByIdThrowsGameNotFoundExceptionWhenIdDoesNotExist() throws Exception {
+    void getGameByIdThrowsGameNotFoundExceptionWhenIdDoesNotExist() throws Exception {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
@@ -75,7 +75,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void startMultipleGamesCanFindFirstOne() {
+    void startMultipleGamesCanFindFirstOne() {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
@@ -90,7 +90,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void startGameAssignsIdFromGenerator() {
+    void startGameAssignsIdFromGenerator() {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(42L);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });

@@ -1,4 +1,4 @@
-package com.jitterted.ebp.blackjack.adapter;
+package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameIdGenerator;
 import com.jitterted.ebp.blackjack.application.GameService;

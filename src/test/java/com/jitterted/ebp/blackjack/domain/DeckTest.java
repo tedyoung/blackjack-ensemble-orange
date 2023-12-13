@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 class DeckTest {
 
     @Test
-    public void fullDeckHas52Cards() throws Exception {
+    void fullDeckHas52Cards() throws Exception {
         Deck deck = new Deck();
 
         assertThat(deck.size())
@@ -19,7 +19,7 @@ class DeckTest {
     }
 
     @Test
-    public void drawCardFromDeckReducesDeckSizeByOne() throws Exception {
+    void drawCardFromDeckReducesDeckSizeByOne() throws Exception {
         Deck deck = new Deck();
 
         deck.draw();
@@ -29,7 +29,7 @@ class DeckTest {
     }
 
     @Test
-    public void drawCardFromDeckReturnsValidCard() throws Exception {
+    void drawCardFromDeckReturnsValidCard() throws Exception {
         Deck deck = new Deck();
 
         Card card = deck.draw();
@@ -42,7 +42,7 @@ class DeckTest {
     }
 
     @Test
-    public void drawAllCardsResultsInSetOf52UniqueCards() throws Exception {
+    void drawAllCardsResultsInSetOf52UniqueCards() throws Exception {
         Deck deck = new Deck();
 
         Set<Card> drawnCards = new HashSet<>();
@@ -55,7 +55,7 @@ class DeckTest {
     }
 
     @Test
-    public void canCreateDeckFromSpecificCards() {
+    void canCreateDeckFromSpecificCards() {
         List<Card> cards = List.of(new Card(Rank.TWO, Suit.HEARTS),
                                    new Card(Rank.ACE, Suit.SPADES));
 

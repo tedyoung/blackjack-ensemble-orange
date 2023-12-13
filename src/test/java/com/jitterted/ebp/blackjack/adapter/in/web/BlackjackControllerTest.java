@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
-    public void startGameCreatesGameAndDoesInitialDeal() throws Exception {
+    void startGameCreatesGameAndDoesInitialDeal() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(41);
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
@@ -34,7 +34,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void gameViewPopulatesViewModelWithGameViewInstanceAndGameId() throws Exception {
+    void gameViewPopulatesViewModelWithGameViewInstanceAndGameId() throws Exception {
         GameIdGenerator gameIdGenerator = new GameIdGenerator(13L);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
@@ -52,7 +52,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
+    void hitCommandResultsInPlayerHavingThreeCardsAndPlayerIsNotDone() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(10);
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
@@ -70,7 +70,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void playerHitsGoesBustAndRedirectsToGamePage() throws Exception {
+    void playerHitsGoesBustAndRedirectsToGamePage() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(18);
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
@@ -88,7 +88,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void playerHitsForASpecificGame() throws Exception {
+    void playerHitsForASpecificGame() throws Exception {
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndGoesBust();
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(15);
         GameService gameService = new GameService(deck, new InMemoryGameRepository(gameIdGenerator), game -> {
@@ -104,7 +104,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void playerHitsForOneGameDoesNotAffectOtherGame() throws Exception {
+    void playerHitsForOneGameDoesNotAffectOtherGame() throws Exception {
         StubDeck twoGameDeckForSecondGameHit = new StubDeck(Rank.TEN, Rank.EIGHT,
                                                             Rank.SEVEN, Rank.JACK,
                                                             Rank.TEN, Rank.EIGHT,
@@ -125,7 +125,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void playerStandsResultsInRedirectToGamePageAndPlayerIsDone() throws Exception {
+    void playerStandsResultsInRedirectToGamePageAndPlayerIsDone() throws Exception {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(73);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
@@ -142,7 +142,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void beforeStartGameThenGameForIdOfZeroThrowsAnException() {
+    void beforeStartGameThenGameForIdOfZeroThrowsAnException() {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
@@ -153,7 +153,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void afterStartGameCurrentGameHasAnId() {
+    void afterStartGameCurrentGameHasAnId() {
         final GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(new Deck(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });
@@ -200,7 +200,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void gameViewForGameInProgressReturnsGameInProgressTemplate() {
+    void gameViewForGameInProgressReturnsGameInProgressTemplate() {
         GameIdGenerator gameIdGenerator = new GameIdGenerator(0);
         GameService gameService = new GameService(StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust(), new InMemoryGameRepository(gameIdGenerator), game -> {
         });

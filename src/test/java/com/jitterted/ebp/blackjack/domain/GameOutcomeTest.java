@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class GameOutcomeTest {
 
     @Test
-    public void playerBeatsDealer() {
+    void playerBeatsDealer() {
         Deck stubDeck = StubDeck.playerBeatsDealerUponInitialDeal();
         Game game = new Game(stubDeck);
         game.initialDeal();
@@ -20,7 +20,7 @@ class GameOutcomeTest {
     }
 
     @Test
-    public void playerHitsAndGoesBustAndLoses() throws Exception {
+    void playerHitsAndGoesBustAndLoses() throws Exception {
         Deck stubDeck = StubDeck.playerHitsAndGoesBust();
         Game game = new Game(stubDeck);
         game.initialDeal();
@@ -32,7 +32,7 @@ class GameOutcomeTest {
     }
 
     @Test
-    public void playerDealtBlackjackUponInitialDealWinsAndIsDone() throws Exception {
+    void playerDealtBlackjackUponInitialDealWinsAndIsDone() throws Exception {
         Deck playerDealtBlackjack = new StubDeck(Rank.ACE, Rank.NINE,
                                                  Rank.JACK, Rank.EIGHT);
         Game game = new Game(playerDealtBlackjack);
@@ -46,7 +46,7 @@ class GameOutcomeTest {
     }
 
     @Test
-    public void standResultsInDealerDrawingCardOnTheirTurn() throws Exception {
+    void standResultsInDealerDrawingCardOnTheirTurn() throws Exception {
         Deck dealerBeatsPlayerAfterDrawingAdditionalCardDeck =
                 new StubDeck(Rank.TEN,  Rank.QUEEN,
                              Rank.NINE, Rank.FIVE,

@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class CardEncoderTest {
+class CardEncoderTest {
 
     @ParameterizedTest
     @MethodSource("cardSupplier")
-    public void cardIsEncodedAsString(Suit suit, Rank rank, String expectedEncoding) throws Exception {
+    void cardIsEncodedAsString(Suit suit, Rank rank, String expectedEncoding) throws Exception {
         Card card = new Card(rank, suit);
 
         String encodedCard = CardEncoder.encode(card);

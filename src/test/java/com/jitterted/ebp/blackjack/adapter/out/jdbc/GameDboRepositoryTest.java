@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
         "spring.datasource.url=jdbc:tc:postgresql:14:///springboot"
 })
 @Tag("integration")
-public class GameDboRepositoryTest {
+class GameDboRepositoryTest {
 
     @Autowired
     GameJdbcRepository gameJdbcRepository;
@@ -35,7 +35,7 @@ public class GameDboRepositoryTest {
     }
 
     @Test
-    public void savedGameIsFoundById() throws Exception {
+    void savedGameIsFoundById() throws Exception {
         GameDbo gameDbo = new GameDbo();
         gameDbo.setPlayerHand("AS,TC");
         gameDbo.setDealerHand("5H,TS");

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 class GameMonitorTest {
 
     @Test
-    public void playerStandsThenGameIsOverAndResultsSentToMonitor() throws Exception {
+    void playerStandsThenGameIsOverAndResultsSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         Deck deck = StubDeck.playerNotDealtBlackjackAndStands();
         GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
@@ -28,7 +28,7 @@ class GameMonitorTest {
     }
 
     @Test
-    public void playerHitsAndGoesBustThenResultsSentToMonitor() throws Exception {
+    void playerHitsAndGoesBustThenResultsSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         StubDeck deck = StubDeck.playerHitsAndGoesBust();
         GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
@@ -41,7 +41,7 @@ class GameMonitorTest {
     }
 
     @Test
-    public void playerHitsDoesNotBustThenNoResultsSendToMonitor() throws Exception {
+    void playerHitsDoesNotBustThenNoResultsSendToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         StubDeck deck = StubDeck.playerNotDealtBlackjackHitsAndDoesNotGoBust();
         GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);
@@ -54,7 +54,7 @@ class GameMonitorTest {
     }
 
     @Test
-    public void playerDealtBlackjackThenResultsSentToMonitor() throws Exception {
+    void playerDealtBlackjackThenResultsSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         StubDeck deck = StubDeck.playerDealtBlackjack();
         GameService gameService = new GameService(deck, new FakeGameRepository(), gameMonitorSpy);

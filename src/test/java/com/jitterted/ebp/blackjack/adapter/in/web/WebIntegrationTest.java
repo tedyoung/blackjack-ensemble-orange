@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.adapter.IntegrationTestConfiguration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,44 +14,44 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 @Tag("integration")
 @Import(IntegrationTestConfiguration.class)
-public class WebIntegrationTest {
+class WebIntegrationTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    public void getOfHomePageIsStatus200Ok() throws Exception {
+    void getOfHomePageIsStatus200Ok() throws Exception {
         mockMvc.perform(get("/index.html"))
                .andExpect(status().isOk());
     }
 
     @Test
-    public void postToStartGameEndpointIsRedirect() throws Exception {
+    void postToStartGameEndpointIsRedirect() throws Exception {
         mockMvc.perform(post("/start-game"))
                .andExpect(status().is3xxRedirection());
     }
 
     @Test
-    public void getGameEndpointIsStatus200Ok() throws Exception {
+    void getGameEndpointIsStatus200Ok() throws Exception {
         mockMvc.perform(post("/start-game"));
         mockMvc.perform(get("/game/0"))
                .andExpect(status().isOk());
     }
 
     @Test
-    public void postToHitEndpointIsRedirect() throws Exception {
+    void postToHitEndpointIsRedirect() throws Exception {
         mockMvc.perform(post("/hit/0"))
                .andExpect(status().is3xxRedirection());
     }
 
     @Test
-    public void getDoneEndpointIs200Ok() throws Exception {
+    void getDoneEndpointIs200Ok() throws Exception {
         mockMvc.perform(get("/done/0"))
                .andExpect(status().isNotFound());
     }
 
     @Test
-    public void postToStandEndpointIsRedirect() throws Exception {
+    void postToStandEndpointIsRedirect() throws Exception {
         mockMvc.perform(post("/stand/0"))
                .andExpect(status().is3xxRedirection());
     }

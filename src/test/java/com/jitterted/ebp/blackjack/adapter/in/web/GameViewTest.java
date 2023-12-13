@@ -12,10 +12,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GameViewTest {
+class GameViewTest {
 
     @Test
-    public void gameViewPopulatesViewModelWithAllCards() throws Exception {
+    void gameViewPopulatesViewModelWithAllCards() throws Exception {
         Deck stubDeck = new StubDeck(List.of(new Card(Rank.TEN, Suit.DIAMONDS),
                                              new Card(Rank.TWO, Suit.HEARTS),
                                              new Card(Rank.KING, Suit.DIAMONDS),
